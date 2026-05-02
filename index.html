@@ -3,467 +3,371 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Analisis Platform Simulasi Elektronik & Potensi Reverse Engineering</title>
+    <title>The Research Journal | Joeinus Research Library</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
     
-    <!-- Chosen Palette: Warm Slate & Teal Accent -->
-    <!-- Application Structure Plan: The SPA is structured as an interactive executive dashboard. It begins with a macro overview of the market landscape to establish context. Then, it flows into a detailed, interactive "Deep Dive" section where users can select specific platforms to reveal their underlying tech stacks, capabilities, and reverse-engineering feasibility without cluttering the screen. Finally, a comparative matrix and strategic recommendation section synthesize the findings, providing actionable advice for building a new simulator. This task-oriented flow minimizes cognitive load while maximizing data exploration. -->
-    <!-- Visualization & Content Choices: 
-         1. Goal: Compare Market Presence vs Openness -> Viz: Bar Chart (Chart.js) -> Interaction: Hover tooltips -> Justification: Clearly contrasts popularity with how accessible the codebase is for study. Library: Chart.js (Canvas).
-         2. Goal: Detailed Platform Profiling -> Viz: Interactive Tabs + Radar Chart (Chart.js) + Dynamic Text -> Interaction: Click tabs to update content and chart -> Justification: Allows deep diving into 5 metrics (UI, Accuracy, Library, Dev Ease, Perf) per platform without overwhelming the user. Library: Vanilla JS DOM manipulation + Chart.js (Canvas).
-         3. Goal: Tech Stack & Feasibility Comparison -> Viz: HTML/Tailwind Grid Cards -> Interaction: Hover states -> Justification: Clean, text-heavy data organization. NO SVG/Mermaid used.
-    -->
-    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
-
     <style>
+        :root {
+            --primary: #1a1a1a;
+            --accent: #d4af37; /* Gold accent for book feel */
+            --bg-paper: #fdfbf7;
+            --text-main: #2c2c2c;
+            --text-muted: #666;
+        }
+
         body {
-            background-color: #f8fafc;
-            color: #1e293b;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-paper);
+            color: var(--text-main);
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
         }
-        .chart-container {
-            position: relative;
-            width: 100%;
+
+        h1, h2, h3, .serif {
+            font-family: 'Cormorant Garamond', serif;
+        }
+
+        /* Premium Header / Hero */
+        .hero {
+            height: 80vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 2rem;
+            background: linear-gradient(rgba(253, 251, 247, 0.8), rgba(253, 251, 247, 0.8)), 
+                        url('https://images.unsplash.com/photo-1507842217343-583bb7270b66?auto=format&fit=crop&q=80&w=2000');
+            background-attachment: fixed;
+            background-size: cover;
+            border-bottom: 1px solid #eee;
+        }
+
+        .hero h1 {
+            font-size: 5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            letter-spacing: -1px;
+            color: var(--primary);
+        }
+
+        .hero p {
+            font-size: 1.25rem;
             max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
-            height: 350px;
-            max-height: 400px;
+            color: var(--text-muted);
+            font-style: italic;
         }
-        @media (min-width: 768px) {
-            .chart-container {
-                height: 400px;
-            }
+
+        .gold-divider {
+            width: 80px;
+            height: 2px;
+            background-color: var(--accent);
+            margin: 2rem 0;
         }
-        .btn-active {
-            background-color: #0d9488;
+
+        /* Filter Section */
+        .controls {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: rgba(253, 251, 247, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid #eee;
+            padding: 1.5rem 0;
+        }
+
+        .filter-btn {
+            padding: 0.5rem 1.5rem;
+            border-radius: 9999px;
+            font-size: 0.875rem;
+            font-weight: 500;
+            transition: all 0.3s;
+            border: 1px solid #ddd;
+            color: var(--text-muted);
+        }
+
+        .filter-btn.active {
+            background-color: var(--primary);
             color: white;
-            border-color: #0d9488;
+            border-color: var(--primary);
         }
-        .btn-inactive {
-            background-color: transparent;
-            color: #475569;
-            border-color: #cbd5e1;
+
+        .filter-btn:hover:not(.active) {
+            background-color: #f0f0f0;
         }
-        .card-hover {
-            transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+
+        /* Book Grid */
+        .research-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 3rem;
+            padding: 4rem 0;
         }
-        .card-hover:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+
+        .book-card {
+            display: flex;
+            flex-direction: column;
+            group: hover;
+            cursor: pointer;
+            transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+        }
+
+        .book-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .book-cover-container {
+            position: relative;
+            aspect-ratio: 3/4;
+            background: #eee;
+            border-radius: 4px 12px 12px 4px;
+            overflow: hidden;
+            box-shadow: 10px 10px 30px rgba(0,0,0,0.1);
+            margin-bottom: 1.5rem;
+            perspective: 1000px;
+        }
+
+        .book-cover-container::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0) 5%, rgba(255,255,255,0.1) 10%, rgba(0,0,0,0) 15%);
+            pointer-events: none;
+        }
+
+        .book-cover-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+
+        .book-card:hover .book-cover-img {
+            transform: scale(1.05);
+        }
+
+        .book-category {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--accent);
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .book-title {
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: var(--primary);
+            line-height: 1.2;
+            margin-bottom: 0.75rem;
+        }
+
+        .book-summary {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            line-height: 1.6;
+        }
+
+        .book-meta {
+            margin-top: auto;
+            padding-top: 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.8rem;
+            color: #999;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: var(--bg-paper);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #ddd;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #ccc;
+        }
+
+        /* Search Bar Customization */
+        .search-input {
+            background: transparent;
+            border-bottom: 1px solid #ccc;
+            padding: 0.5rem 0;
+            width: 100%;
+            max-width: 300px;
+            font-size: 0.9rem;
+            transition: border-color 0.3s;
+        }
+        .search-input:focus {
+            outline: none;
+            border-color: var(--accent);
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 3rem; }
+            .hero { height: 60vh; }
+        }
+
+        /* Fade-in Animation */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .fade-in {
+            animation: fadeInUp 0.8s ease forwards;
         }
     </style>
 </head>
 <body class="antialiased">
 
-    <nav class="bg-slate-900 text-white p-4 sticky top-0 z-50 shadow-md">
-        <div class="max-w-6xl mx-auto flex justify-between items-center">
-            <h1 class="text-xl font-bold tracking-wide">&#x26A1; DevSim Research</h1>
-            <div class="hidden md:flex space-x-6 text-sm">
-                <a href="#overview" class="hover:text-teal-400 transition-colors">Ikhtisar Pasar</a>
-                <a href="#deepdive" class="hover:text-teal-400 transition-colors">Analisis Platform</a>
-                <a href="#techstack" class="hover:text-teal-400 transition-colors">Arsitektur & Tech</a>
-                <a href="#recommendation" class="hover:text-teal-400 transition-colors">Rekomendasi</a>
+    <!-- Hero Section -->
+    <header class="hero">
+        <h1 class="fade-in">The Research Journal</h1>
+        <div class="gold-divider fade-in" style="animation-delay: 0.2s"></div>
+        <p class="fade-in" style="animation-delay: 0.4s">A curated collection of deep research, technical analysis, and strategic insights by Joeinus.</p>
+    </header>
+
+    <!-- Controls & Filters -->
+    <div class="controls">
+        <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-6">
+            <div class="flex flex-wrap justify-center gap-3" id="category-filters">
+                <button class="filter-btn active" data-category="all">All Entries</button>
+                <!-- Categories will be injected here -->
+            </div>
+            <div class="relative w-full md:w-auto">
+                <input type="text" id="search-box" placeholder="Cari riset..." class="search-input">
+                <span class="absolute right-0 top-2 opacity-30">🔍</span>
             </div>
         </div>
-    </nav>
+    </div>
 
-    <main class="max-w-6xl mx-auto p-4 sm:p-6 lg:p-8 space-y-16">
-
-        <header class="text-center py-12 border-b border-slate-200">
-            <h2 class="text-4xl md:text-5xl font-extrabold text-slate-800 mb-4 tracking-tight">Riset Platform Simulasi Elektronik & IoT</h2>
-            <p class="text-lg text-slate-600 max-w-3xl mx-auto">
-                Laporan interaktif ini menganalisis mesin simulasi elektronik terkemuka (Wokwi, Tinkercad, Proteus, dll.) untuk mengevaluasi arsitektur mereka. Tujuannya adalah memberikan wawasan strategis bagi pengembang yang ingin melakukan <strong>rekayasa balik (reverse engineering)</strong> atau membangun platform simulasi baru dari awal.
-            </p>
-        </header>
-
-        <section id="overview" class="scroll-mt-20">
-            <div class="mb-8">
-                <h3 class="text-2xl font-bold text-slate-800 mb-2 flex items-center">&#x1F4CA; Lanskap Pasar & Keterbukaan Sistem</h3>
-                <p class="text-slate-600 leading-relaxed">
-                    Bagian ini memetakan popularitas platform saat ini dibandingkan dengan seberapa "terbuka" sistem mereka untuk dipelajari atau direkayasa balik. Platform dengan basis pengguna besar seringkali tertutup (proprietary), sementara platform open-source menawarkan peluang pembelajaran teknis yang lebih baik namun mungkin tertinggal dalam hal UI/UX. Grafik di bawah membantu memvisualisasikan trade-off ini.
-                </p>
-            </div>
-
-            <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100">
-                <div class="chart-container">
-                    <canvas id="overviewChart"></canvas>
-                </div>
-                <div class="mt-6 text-sm text-slate-500 text-center bg-slate-50 p-4 rounded-lg">
-                    <strong>Cara membaca:</strong> Batang <span class="text-slate-800 font-bold">Gelap</span> menunjukkan perkiraan pangsa pasar/popularitas. Batang <span class="text-teal-600 font-bold">Teal</span> menunjukkan tingkat keterbukaan sistem (skor kemudahan untuk reverse engineering/mempelajari source code).
-                </div>
-            </div>
-        </section>
-
-        <section id="deepdive" class="scroll-mt-20 bg-slate-100 -mx-4 sm:-mx-6 lg:-mx-8 px-4 sm:px-6 lg:px-8 py-12 border-y border-slate-200">
-            <div class="max-w-6xl mx-auto">
-                <div class="mb-8 text-center">
-                    <h3 class="text-2xl font-bold text-slate-800 mb-2">&#x1F52C; Deep Dive: Analisis Kapabilitas Platform</h3>
-                    <p class="text-slate-600 max-w-2xl mx-auto">
-                        Pilih platform di bawah ini untuk melihat rincian metrik kemampuannya. Analisis ini memecah kekuatan dan kelemahan inti dari masing-masing engine simulasi berdasarkan pengalaman pengguna, akurasi mesin, hingga arsitektur dasar.
-                    </p>
-                </div>
-
-                <div class="flex flex-wrap justify-center gap-2 md:gap-4 mb-8" id="platform-selectors">
-                    <button onclick="selectPlatform('wokwi')" id="btn-wokwi" class="px-6 py-2 rounded-full border font-semibold transition-all btn-active">Wokwi</button>
-                    <button onclick="selectPlatform('tinkercad')" id="btn-tinkercad" class="px-6 py-2 rounded-full border font-semibold transition-all btn-inactive">Tinkercad</button>
-                    <button onclick="selectPlatform('proteus')" id="btn-proteus" class="px-6 py-2 rounded-full border font-semibold transition-all btn-inactive">Proteus</button>
-                    <button onclick="selectPlatform('falstad')" id="btn-falstad" class="px-6 py-2 rounded-full border font-semibold transition-all btn-inactive">Falstad</button>
-                    <button onclick="selectPlatform('fritzing')" id="btn-fritzing" class="px-6 py-2 rounded-full border font-semibold transition-all btn-inactive">Fritzing</button>
-                </div>
-
-                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
-                    <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100">
-                        <div class="chart-container" style="height: 350px;">
-                            <canvas id="radarChart"></canvas>
-                        </div>
-                    </div>
-
-                    <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-100 h-full flex flex-col justify-center">
-                        <div class="flex items-center gap-3 mb-4">
-                            <span class="text-3xl" id="detail-icon">&#x1F310;</span>
-                            <h4 class="text-3xl font-bold text-slate-800" id="detail-title">Wokwi</h4>
-                        </div>
-                        
-                        <div class="space-y-4">
-                            <div>
-                                <h5 class="text-sm font-bold text-slate-400 uppercase tracking-wider mb-1">Fokus Utama</h5>
-                                <p class="text-slate-700 font-medium text-lg" id="detail-focus">Simulasi mikrokontroler & IoT berbasis Web (Arduino, ESP32, Pi Pico).</p>
-                            </div>
-                            
-                            <div class="p-4 bg-teal-50 rounded-lg border border-teal-100">
-                                <h5 class="text-sm font-bold text-teal-800 uppercase tracking-wider mb-2">Peluang Rekayasa Balik (Reverse Engineering)</h5>
-                                <p class="text-teal-900" id="detail-re"><strong>Sangat Tinggi.</strong> Core simulasi (AVR8js) bersifat open-source. Menggunakan WebAssembly untuk performa. Sangat direkomendasikan untuk dipelajari arsitektur web-native nya.</p>
-                            </div>
-
-                            <div>
-                                <h5 class="text-sm font-bold text-slate-400 uppercase tracking-wider mb-1">Kelemahan & Limitasi</h5>
-                                <p class="text-slate-600" id="detail-cons">Tidak dirancang untuk desain PCB atau simulasi sirkuit analog frekuensi tinggi yang sangat kompleks.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section id="techstack" class="scroll-mt-20">
-            <div class="mb-8">
-                <h3 class="text-2xl font-bold text-slate-800 mb-2 flex items-center">&#x2699; Matriks Teknologi & Arsitektur</h3>
-                <p class="text-slate-600 leading-relaxed">
-                    Jika Anda berencana membangun engine baru, memahami tumpukan teknologi (tech stack) dari kompetitor adalah krusial. Bagian ini menyoroti bagaimana platform-platform ini menangani komputasi berat dari simulasi sirkuit, merender grafis, dan mengelola state aplikasi.
-                </p>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
-                
-                <div class="bg-white border border-slate-200 rounded-xl p-6 card-hover flex flex-col">
-                    <div class="flex justify-between items-start mb-4">
-                        <h4 class="text-xl font-bold text-slate-800">Arsitektur Web-Native</h4>
-                        <span class="bg-teal-100 text-teal-800 text-xs font-bold px-2 py-1 rounded">Modern</span>
-                    </div>
-                    <ul class="space-y-2 text-slate-600 mb-4 flex-grow text-sm">
-                        <li><strong>Contoh:</strong> Wokwi</li>
-                        <li><strong>Simulasi:</strong> WebAssembly (Wasm), C/C++ dikompilasi ke Web.</li>
-                        <li><strong>Rendering:</strong> HTML5 Canvas, SVG DOM manipulation (dihindari untuk perf tinggi, diganti Canvas/WebGL).</li>
-                        <li><strong>Kelebihan:</strong> Berjalan di browser tanpa instalasi, performa mendekati native berkat Wasm.</li>
-                    </ul>
-                    <div class="pt-4 border-t border-slate-100">
-                        <p class="text-xs text-slate-500"><strong>Catatan RE:</strong> Inspect network tab untuk melihat modul .wasm. Cari repositori Github pendukung seperti AVR8js.</p>
-                    </div>
-                </div>
-
-                <div class="bg-white border border-slate-200 rounded-xl p-6 card-hover flex flex-col">
-                    <div class="flex justify-between items-start mb-4">
-                        <h4 class="text-xl font-bold text-slate-800">Arsitektur WebGL/3D</h4>
-                        <span class="bg-blue-100 text-blue-800 text-xs font-bold px-2 py-1 rounded">Proprietary</span>
-                    </div>
-                    <ul class="space-y-2 text-slate-600 mb-4 flex-grow text-sm">
-                        <li><strong>Contoh:</strong> Tinkercad</li>
-                        <li><strong>Simulasi:</strong> Server-side execution atau obfuscated JS engine.</li>
-                        <li><strong>Rendering:</strong> WebGL (Three.js atau custom engine) untuk render 3D komponen.</li>
-                        <li><strong>Kelebihan:</strong> Visualisasi sangat menarik untuk edukasi dasar, UI intuitif.</li>
-                    </ul>
-                    <div class="pt-4 border-t border-slate-100">
-                        <p class="text-xs text-slate-500"><strong>Catatan RE:</strong> Sangat sulit di-reverse engineer bagian logikanya karena kode diobfuscate/minified oleh Autodesk. UI/UX layak ditiru.</p>
-                    </div>
-                </div>
-
-                <div class="bg-white border border-slate-200 rounded-xl p-6 card-hover flex flex-col">
-                    <div class="flex justify-between items-start mb-4">
-                        <h4 class="text-xl font-bold text-slate-800">Arsitektur Desktop (Native)</h4>
-                        <span class="bg-amber-100 text-amber-800 text-xs font-bold px-2 py-1 rounded">Legacy/Pro</span>
-                    </div>
-                    <ul class="space-y-2 text-slate-600 mb-4 flex-grow text-sm">
-                        <li><strong>Contoh:</strong> Proteus, Fritzing</li>
-                        <li><strong>Simulasi:</strong> C/C++ (SPICE engine modifikasi).</li>
-                        <li><strong>Rendering:</strong> GDI+, Qt, OpenGL.</li>
-                        <li><strong>Kelebihan:</strong> Kemampuan simulasi analog presisi tinggi, desain PCB terintegrasi.</li>
-                    </ul>
-                    <div class="pt-4 border-t border-slate-100">
-                        <p class="text-xs text-slate-500"><strong>Catatan RE:</strong> Membutuhkan decompiler (IDA Pro/Ghidra) untuk closed-source. Untuk Fritzing, source code C++/Qt tersedia di Github.</p>
-                    </div>
-                </div>
-
-            </div>
-        </section>
-
-        <section id="recommendation" class="scroll-mt-20 bg-slate-800 text-white rounded-3xl p-8 md:p-12 shadow-xl relative overflow-hidden">
-            <div class="relative z-10">
-                <h3 class="text-3xl font-bold mb-6">&#x1F4A1; Kesimpulan & Rekomendasi Pembuatan Platform Baru</h3>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                    <div>
-                        <p class="text-slate-300 leading-relaxed mb-4 text-lg">
-                            Berdasarkan analisis, masa depan simulasi elektronik berada di browser dengan performa tinggi. Jika Anda ingin membuat yang baru atau melakukan reverse engineering, <strong>pendekatan Wokwi adalah standar emas saat ini.</strong>
-                        </p>
-                        <h4 class="font-bold text-teal-400 text-xl mt-6 mb-3">Roadmap yang Disarankan:</h4>
-                        <ul class="space-y-3">
-                            <li class="flex items-start">
-                                <span class="mr-2">&#x2705;</span>
-                                <div><strong>Pelajari AVR8js / RP2040js:</strong> Engine simulasi open-source ini adalah kunci. Pelajari bagaimana mereka mengeksekusi instruksi mikrokontroler di JavaScript/TypeScript.</div>
-                            </li>
-                            <li class="flex items-start">
-                                <span class="mr-2">&#x2705;</span>
-                                <div><strong>Gunakan WebAssembly (Wasm):</strong> Untuk simulasi sirkuit analog (seperti SPICE) atau komputasi berat, kompilasi kode C/C++ ke Wasm agar berjalan cepat di browser.</div>
-                            </li>
-                            <li class="flex items-start">
-                                <span class="mr-2">&#x2705;</span>
-                                <div><strong>Render dengan Canvas:</strong> Hindari rendering komponen grafis dengan elemen DOM yang banyak. Gunakan HTML5 `<canvas>` untuk menggambar jalur kabel dan status pin (seperti implementasi kami di halaman ini).</div>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="bg-slate-900/50 p-6 rounded-2xl border border-slate-700 backdrop-blur-sm">
-                        <h4 class="font-bold text-white mb-4 flex items-center gap-2">
-                            <span>&#x1F6E0;</span> Stack Rekomendasi Modern
-                        </h4>
-                        <div class="space-y-4">
-                            <div>
-                                <span class="block text-xs text-slate-400 uppercase tracking-widest mb-1">Frontend UI</span>
-                                <span class="bg-slate-700 px-3 py-1 rounded text-sm font-medium">React / Preact</span> + <span class="bg-slate-700 px-3 py-1 rounded text-sm font-medium">Tailwind CSS</span>
-                            </div>
-                            <div>
-                                <span class="block text-xs text-slate-400 uppercase tracking-widest mb-1">Core Simulation Engine</span>
-                                <span class="bg-slate-700 px-3 py-1 rounded text-sm font-medium">WebAssembly (Wasm)</span> / <span class="bg-slate-700 px-3 py-1 rounded text-sm font-medium">TypeScript</span>
-                            </div>
-                            <div>
-                                <span class="block text-xs text-slate-400 uppercase tracking-widest mb-1">Circuit Renderer</span>
-                                <span class="bg-slate-700 px-3 py-1 rounded text-sm font-medium">HTML5 Canvas API</span> / <span class="bg-slate-700 px-3 py-1 rounded text-sm font-medium">PixiJS</span>
-                            </div>
-                            <div>
-                                <span class="block text-xs text-slate-400 uppercase tracking-widest mb-1">State Management</span>
-                                <span class="bg-slate-700 px-3 py-1 rounded text-sm font-medium">Zustand</span> atau <span class="bg-slate-700 px-3 py-1 rounded text-sm font-medium">Redux (Ringan)</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="absolute top-0 right-0 -mr-16 -mt-16 text-slate-700/20 text-9xl font-bold transform rotate-12 select-none pointer-events-none">&#x2699;</div>
-        </section>
-
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto px-6 min-h-screen">
+        <div class="research-grid" id="papers-grid">
+            <!-- Paper cards will be injected here -->
+        </div>
     </main>
 
-    <footer class="text-center py-8 text-slate-500 text-sm mt-12 border-t border-slate-200">
-        <p>&copy; 2026 DevSim Research SPA. Data bersifat ilustratif untuk analisis arsitektur.</p>
+    <!-- Footer -->
+    <footer class="bg-white border-t border-gray-100 py-20 mt-20 text-center">
+        <div class="max-w-2xl mx-auto px-6">
+            <div class="serif text-3xl font-bold mb-4">Joeinus Research</div>
+            <p class="text-gray-500 mb-8 italic">"Synthesizing complexity into clarity."</p>
+            <div class="flex justify-center gap-6 text-sm text-gray-400">
+                <a href="https://github.com/joeinus134131" class="hover:text-accent">Github</a>
+                <a href="https://www.linkedin.com/in/madeagusandigunawan/" class="hover:text-accent">LinkedIn</a>
+                <a href="https://research.joeinus.site/" class="hover:text-accent">About</a>
+            </div>
+            <div class="mt-12 text-xs text-gray-300 uppercase tracking-widest">
+                &copy; 2026 Private Intelligence & Research Library
+            </div>
+        </div>
     </footer>
 
+    <!-- Configuration Loading -->
+    <script src="library-config.js"></script>
+
     <script>
-        // --- Data Storage ---
-        const platformData = {
-            wokwi: {
-                title: "Wokwi",
-                icon: "&#x1F310;",
-                focus: "Simulasi mikrokontroler & IoT berbasis Web (Arduino, ESP32, Pi Pico).",
-                re: "<strong>Sangat Tinggi.</strong> Core simulasi (AVR8js) bersifat open-source. Menggunakan WebAssembly untuk performa. Sangat direkomendasikan untuk dipelajari arsitektur web-native nya.",
-                cons: "Tidak dirancang untuk desain PCB atau simulasi sirkuit analog frekuensi tinggi yang sangat kompleks.",
-                stats: [85, 90, 75, 95, 95] // [UI, Sim Accuracy, Library, Dev Ease, Web Perf]
-            },
-            tinkercad: {
-                title: "Tinkercad Circuits",
-                icon: "&#x1F3A8;",
-                focus: "Edukasi dasar elektronika dan desain 3D untuk pemula.",
-                re: "<strong>Rendah.</strong> Arsitektur bersifat proprietary dan tertutup (closed-source) milik Autodesk. Logika disembunyikan di backend/obfuscated JS. Bagus hanya untuk referensi UI/UX.",
-                cons: "Pilihan komponen sangat terbatas. Simulasi tidak real-time untuk kode yang kompleks.",
-                stats: [95, 70, 60, 20, 85]
-            },
-            proteus: {
-                title: "Proteus VSM",
-                icon: "&#x1F5A5;",
-                focus: "Aplikasi Desktop Profesional untuk co-simulation SPICE analog dan mikrokontroler + Desain PCB.",
-                re: "<strong>Sangat Rendah.</strong> Perangkat lunak desktop berpemilik (C++ legacy). Membutuhkan teknik reverse engineering biner (Ghidra/IDA Pro) yang sangat kompleks dan berisiko hukum.",
-                cons: "Aplikasi berbayar mahal, UI/UX terlihat usang (legacy), tidak bisa dijalankan secara native di browser.",
-                stats: [60, 98, 95, 10, 20]
-            },
-            falstad: {
-                title: "Falstad Circuit",
-                icon: "&#x1F4BE;",
-                focus: "Simulasi sirkuit analog murni tingkat komponen dasar (resistor, kapasitor, op-amp).",
-                re: "<strong>Tinggi.</strong> Merupakan porting dari Java applet ke JavaScript. Kode open-source. Sangat bagus untuk mempelajari dasar pembuatan mesin persamaan sirkuit analog.",
-                cons: "Tidak memiliki simulasi mikrokontroler tingkat tinggi (Arduino/C++). UI sangat minimalis dan terlihat kaku.",
-                stats: [50, 85, 70, 85, 90]
-            },
-            fritzing: {
-                title: "Fritzing",
-                icon: "&#x1F5C4;",
-                focus: "Desain visual breadboard, skematik, dan routing PCB dasar untuk Makers.",
-                re: "<strong>Menengah.</strong> Core aplikasi adalah C++ dan framework Qt (Desktop). Open-source, sehingga strukturnya bisa dipelajari, namun engine simulasinya sangat terbatas.",
-                cons: "Engine simulasi elektroniknya sangat minim (fokus utama pada desain visual). Arsitektur desktop, bukan web.",
-                stats: [80, 40, 85, 60, 30]
-            }
-        };
+        document.addEventListener('DOMContentLoaded', () => {
+            const papersGrid = document.getElementById('papers-grid');
+            const categoryFilters = document.getElementById('category-filters');
+            const searchBox = document.getElementById('search-box');
+            
+            let currentFilter = 'all';
+            let searchQuery = '';
 
-        // --- State Management ---
-        let currentPlatform = 'wokwi';
-        let radarChartInstance = null;
-
-        // --- Chart.js Configuration ---
-        Chart.defaults.font.family = "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif";
-        Chart.defaults.color = '#64748b';
-
-        // 1. Initialize Overview Bar Chart
-        const ctxOverview = document.getElementById('overviewChart').getContext('2d');
-        new Chart(ctxOverview, {
-            type: 'bar',
-            data: {
-                labels: ['Wokwi', 'Tinkercad', 'Proteus', 'Falstad', 'Fritzing'],
-                datasets: [
-                    {
-                        label: 'Skor Popularitas / Market Share',
-                        data: [85, 95, 80, 65, 75],
-                        backgroundColor: '#1e293b', // slate-800
-                        borderRadius: 6
-                    },
-                    {
-                        label: 'Kemudahan Reverse Engineering (Keterbukaan)',
-                        data: [95, 20, 10, 85, 60],
-                        backgroundColor: '#0d9488', // teal-600
-                        borderRadius: 6
-                    }
-                ]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false, // CRITICAL for chart-container height control
-                plugins: {
-                    legend: {
-                        position: 'top',
-                        labels: { usePointStyle: true, boxWidth: 8 }
-                    },
-                    tooltip: {
-                        mode: 'index',
-                        intersect: false,
-                        backgroundColor: 'rgba(15, 23, 42, 0.9)'
-                    }
-                },
-                scales: {
-                    y: {
-                        beginAtZero: true,
-                        max: 100,
-                        grid: { borderDash: [4, 4], color: '#e2e8f0' }
-                    },
-                    x: {
-                        grid: { display: false }
-                    }
-                }
-            }
-        });
-
-        // 2. Initialize Radar Chart
-        const ctxRadar = document.getElementById('radarChart').getContext('2d');
-        function initRadarChart() {
-            radarChartInstance = new Chart(ctxRadar, {
-                type: 'radar',
-                data: {
-                    labels: [
-                        ['Modernitas', 'UI/UX'], 
-                        ['Akurasi', 'Simulasi'], 
-                        ['Kelengkapan', 'Library'], 
-                        ['Kemudahan', 'Dipahami/RE'], 
-                        ['Performa', 'Web']
-                    ], // Using arrays for text wrapping (16-char logic alternative provided by Chart.js native array support)
-                    datasets: [{
-                        label: 'Skor Kapabilitas',
-                        data: platformData[currentPlatform].stats,
-                        backgroundColor: 'rgba(13, 148, 136, 0.2)', // Teal transparent
-                        borderColor: '#0d9488',
-                        pointBackgroundColor: '#0d9488',
-                        pointBorderColor: '#fff',
-                        pointHoverBackgroundColor: '#fff',
-                        pointHoverBorderColor: '#0d9488',
-                        borderWidth: 2,
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    scales: {
-                        r: {
-                            angleLines: { color: '#e2e8f0' },
-                            grid: { color: '#e2e8f0' },
-                            pointLabels: {
-                                font: { size: 12, weight: 'bold' },
-                                color: '#475569'
-                            },
-                            ticks: {
-                                beginAtZero: true,
-                                max: 100,
-                                stepSize: 20,
-                                display: false // hide numbers on the axes to keep it clean
-                            }
-                        }
-                    },
-                    plugins: {
-                        legend: { display: false },
-                        tooltip: { backgroundColor: 'rgba(15, 23, 42, 0.9)' }
-                    }
-                }
-            });
-        }
-
-        // --- Interaction Logic ---
-        function selectPlatform(platformId) {
-            currentPlatform = platformId;
-            const data = platformData[platformId];
-
-            // 1. Update Buttons State
-            const buttons = document.querySelectorAll('#platform-selectors button');
-            buttons.forEach(btn => {
-                if(btn.id === `btn-${platformId}`) {
-                    btn.classList.remove('btn-inactive');
-                    btn.classList.add('btn-active');
-                } else {
-                    btn.classList.remove('btn-active');
-                    btn.classList.add('btn-inactive');
-                }
-            });
-
-            // 2. Update Text Content
-            document.getElementById('detail-icon').innerHTML = data.icon;
-            document.getElementById('detail-title').innerText = data.title;
-            document.getElementById('detail-focus').innerText = data.focus;
-            document.getElementById('detail-re').innerHTML = data.re;
-            document.getElementById('detail-cons').innerText = data.cons;
-
-            // 3. Update Chart
-            if (radarChartInstance) {
-                radarChartInstance.data.datasets[0].data = data.stats;
-                radarChartInstance.update();
-            }
-        }
-
-        // Initialize on load
-        window.addEventListener('DOMContentLoaded', () => {
-            initRadarChart();
-            // Trigger smooth scrolling for nav links
-            document.querySelectorAll('nav a').forEach(anchor => {
-                anchor.addEventListener('click', function (e) {
-                    e.preventDefault();
-                    document.querySelector(this.getAttribute('href')).scrollIntoView({
-                        behavior: 'smooth'
-                    });
+            // Inject Categories
+            libraryConfig.categories.forEach(cat => {
+                const btn = document.createElement('button');
+                btn.className = 'filter-btn';
+                btn.dataset.category = cat.id;
+                btn.textContent = cat.name;
+                btn.addEventListener('click', () => {
+                    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                    currentFilter = cat.id;
+                    renderPapers();
                 });
+                categoryFilters.appendChild(btn);
+            });
+
+            // Initial Render
+            renderPapers();
+
+            // Search listener
+            searchBox.addEventListener('input', (e) => {
+                searchQuery = e.target.value.toLowerCase();
+                renderPapers();
+            });
+
+            function renderPapers() {
+                papersGrid.innerHTML = '';
+                
+                const filteredPapers = libraryConfig.papers.filter(paper => {
+                    const matchesCategory = currentFilter === 'all' || paper.category === currentFilter;
+                    const matchesSearch = paper.title.toLowerCase().includes(searchQuery) || 
+                                         paper.summary.toLowerCase().includes(searchQuery) ||
+                                         paper.tags.some(tag => tag.toLowerCase().includes(searchQuery));
+                    return matchesCategory && matchesSearch;
+                });
+
+                if (filteredPapers.length === 0) {
+                    papersGrid.innerHTML = `
+                        <div class="col-span-full py-20 text-center text-gray-400">
+                            <p class="text-xl serif italic">No entries found matching your criteria.</p>
+                        </div>
+                    `;
+                    return;
+                }
+
+                filteredPapers.forEach((paper, index) => {
+                    const card = document.createElement('div');
+                    card.className = 'book-card fade-in';
+                    card.style.animationDelay = `${index * 0.1}s`;
+                    
+                    card.innerHTML = `
+                        <div class="book-cover-container" onclick="window.location.href='${paper.path}'">
+                            <img src="${paper.coverImage}" class="book-cover-img" alt="${paper.title}">
+                            <div class="absolute inset-0 bg-black/20 opacity-0 hover:opacity-100 transition-opacity flex items-center justify-center">
+                                <span class="bg-white/90 px-4 py-2 rounded-full text-xs font-bold uppercase tracking-wider text-black">Read Paper</span>
+                            </div>
+                        </div>
+                        <div class="book-category">${libraryConfig.categories.find(c => c.id === paper.category)?.name || paper.category}</div>
+                        <h3 class="book-title" onclick="window.location.href='${paper.path}'">${paper.title}</h3>
+                        <p class="book-summary">${paper.summary}</p>
+                        <div class="book-meta">
+                            <span>${new Date(paper.date).toLocaleDateString('id-ID', { year: 'numeric', month: 'long', day: 'numeric' })}</span>
+                            <div class="flex gap-2">
+                                ${paper.tags.slice(0, 2).map(tag => `<span class="bg-gray-100 px-2 py-0.5 rounded text-[10px]">${tag}</span>`).join('')}
+                            </div>
+                        </div>
+                    `;
+                    papersGrid.appendChild(card);
+                });
+            }
+
+            // Handle "All Entries" filter click
+            document.querySelector('[data-category="all"]').addEventListener('click', function() {
+                document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+                currentFilter = 'all';
+                renderPapers();
             });
         });
-
     </script>
 </body>
 </html>
