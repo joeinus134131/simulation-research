@@ -174,6 +174,108 @@
             -webkit-box-orient: vertical;
             overflow: hidden;
             line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+
+        .podcast-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-top: 0.5rem;
+            transition: opacity 0.2s;
+        }
+
+        .podcast-link:hover {
+            opacity: 0.8;
+            cursor: pointer;
+        }
+
+        /* Audio Modal */
+        .modal-backdrop {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(8px);
+            z-index: 1000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .modal-backdrop.active {
+            display: flex;
+            opacity: 1;
+        }
+
+        .audio-player-card {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 24px;
+            padding: 2rem;
+            width: 90%;
+            max-width: 450px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            transform: scale(0.9);
+            transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        .modal-backdrop.active .audio-player-card {
+            transform: scale(1);
+        }
+
+        .audio-controls {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .audio-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 0.5rem;
+        }
+
+        .custom-audio {
+            width: 100%;
+            height: 40px;
+            border-radius: 8px;
+        }
+
+        .download-btn {
+            background: var(--primary);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 9999px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.2s;
+        }
+
+        .download-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            padding: 0.5rem;
+            color: #999;
+            cursor: pointer;
         }
 
         .book-meta {
@@ -262,6 +364,37 @@
         </div>
     </main>
 
+    <!-- Audio Player Modal -->
+    <div id="audio-modal" class="modal-backdrop">
+        <div class="audio-player-card relative">
+            <div class="close-modal" id="close-audio">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+            </div>
+            
+            <div class="audio-controls">
+                <div class="w-20 h-20 bg-gray-100 rounded-2xl flex items-center justify-center mb-2 shadow-inner">
+                    <svg class="w-10 h-10 text-accent" fill="currentColor" viewBox="0 0 20 20"><path d="M18 3a1 1 0 00-1.196-.98l-10 2A1 1 0 006 5v9.135A3.235 3.235 0 005 13a3 3 0 103 3V6.236l9-1.8V14.135A3.235 3.235 0 0016 13a3 3 0 103 3V3z"></path></svg>
+                </div>
+                
+                <div>
+                    <h3 class="audio-title serif" id="player-title">Research Podcast</h3>
+                    <p class="text-xs text-gray-400 text-center uppercase tracking-widest" id="player-category">Technology</p>
+                </div>
+
+                <audio id="audio-element" controls class="custom-audio">
+                    Your browser does not support the audio element.
+                </audio>
+
+                <div class="flex gap-4 mt-2">
+                    <a id="download-link" href="#" download class="download-btn">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a2 2 0 002 2h12a2 2 0 002-2v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+                        Download
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Footer -->
     <footer class="bg-white border-t border-gray-100 py-20 mt-20 text-center">
         <div class="max-w-2xl mx-auto px-6">
@@ -349,6 +482,14 @@
                         <div class="book-category">${libraryConfig.categories.find(c => c.id === paper.category)?.name || paper.category}</div>
                         <h3 class="book-title" onclick="window.location.href='${paper.path}'">${paper.title}</h3>
                         <p class="book-summary">${paper.summary}</p>
+                        
+                        ${paper.podcastUrl ? `
+                        <div onclick="openPodcast('${paper.title}', '${paper.category}', '${paper.podcastUrl}')" class="podcast-link mb-4">
+                            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z"></path></svg>
+                            Listen to Podcast
+                        </div>
+                        ` : ''}
+
                         <div class="book-meta">
                             <span>${new Date(paper.date).toLocaleDateString('id-ID', { year: 'numeric', month: 'long', day: 'numeric' })}</span>
                             <div class="flex gap-2">
@@ -368,6 +509,42 @@
                 renderPapers();
             });
         });
+
+        // Podcast Modal Functions
+        const audioModal = document.getElementById('audio-modal');
+        const audioElement = document.getElementById('audio-element');
+        const downloadLink = document.getElementById('download-link');
+        const playerTitle = document.getElementById('player-title');
+        const playerCategory = document.getElementById('player-category');
+
+        function openPodcast(title, categoryId, url) {
+            const category = libraryConfig.categories.find(c => c.id === categoryId)?.name || categoryId;
+            playerTitle.textContent = title;
+            playerCategory.textContent = category;
+            audioElement.src = url;
+            downloadLink.href = url;
+            
+            audioModal.style.display = 'flex';
+            setTimeout(() => {
+                audioModal.classList.add('active');
+            }, 10);
+            
+            audioElement.play();
+        }
+
+        document.getElementById('close-audio').addEventListener('click', closePodcast);
+        audioModal.addEventListener('click', (e) => {
+            if (e.target === audioModal) closePodcast();
+        });
+
+        function closePodcast() {
+            audioModal.classList.remove('active');
+            setTimeout(() => {
+                audioModal.style.display = 'none';
+                audioElement.pause();
+                audioElement.src = '';
+            }, 300);
+        }
     </script>
 </body>
 </html>
