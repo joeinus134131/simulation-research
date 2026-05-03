@@ -403,7 +403,7 @@
             <div class="flex justify-center gap-6 text-sm text-gray-400">
                 <a href="https://github.com/joeinus134131" class="hover:text-accent">Github</a>
                 <a href="https://www.linkedin.com/in/madeagusandigunawan/" class="hover:text-accent">LinkedIn</a>
-                <a href="https://research.joeinus.site/" class="hover:text-accent">About</a>
+                <a href="https://madeagusandigunawan.wordpress.com/" class="hover:text-accent">About</a>
             </div>
             <div class="mt-12 text-xs text-gray-300 uppercase tracking-widest">
                 &copy; 2026 Private Intelligence & Research Library
@@ -420,8 +420,25 @@
             const categoryFilters = document.getElementById('category-filters');
             const searchBox = document.getElementById('search-box');
             
+            // Create Sentinel and Loading Indicator
+            const sentinel = document.createElement('div');
+            sentinel.id = 'sentinel';
+            sentinel.className = 'h-10 w-full col-span-full';
+            
+            const loadingIndicator = document.createElement('div');
+            loadingIndicator.id = 'loading-indicator';
+            loadingIndicator.className = 'col-span-full py-10 text-center hidden';
+            loadingIndicator.innerHTML = `
+                <div class="inline-block w-8 h-8 border-4 border-[#d4af37] border-t-transparent rounded-full animate-spin"></div>
+                <p class="text-xs text-gray-400 mt-2 uppercase tracking-widest serif">Menyusun riset berikutnya...</p>
+            `;
+
             let currentFilter = 'all';
             let searchQuery = '';
+            let currentPage = 1;
+            const itemsPerPage = 3;
+            let isLoading = false;
+            let filteredPapers = [];
 
             // Inject Categories
             libraryConfig.categories.forEach(cat => {
@@ -433,24 +450,25 @@
                     document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
                     btn.classList.add('active');
                     currentFilter = cat.id;
-                    renderPapers();
+                    resetAndRender();
                 });
                 categoryFilters.appendChild(btn);
             });
 
             // Initial Render
-            renderPapers();
+            resetAndRender();
 
             // Search listener
             searchBox.addEventListener('input', (e) => {
                 searchQuery = e.target.value.toLowerCase();
-                renderPapers();
+                resetAndRender();
             });
 
-            function renderPapers() {
+            function resetAndRender() {
                 papersGrid.innerHTML = '';
+                currentPage = 1;
                 
-                const filteredPapers = libraryConfig.papers.filter(paper => {
+                filteredPapers = libraryConfig.papers.filter(paper => {
                     const matchesCategory = currentFilter === 'all' || paper.category === currentFilter;
                     const matchesSearch = paper.title.toLowerCase().includes(searchQuery) || 
                                          paper.summary.toLowerCase().includes(searchQuery) ||
@@ -467,38 +485,85 @@
                     return;
                 }
 
-                filteredPapers.forEach((paper, index) => {
-                    const card = document.createElement('div');
-                    card.className = 'book-card fade-in';
-                    card.style.animationDelay = `${index * 0.1}s`;
-                    
-                    card.innerHTML = `
-                        <div class="book-cover-container" onclick="window.location.href='${paper.path}'">
-                            <img src="${paper.coverImage}" class="book-cover-img" alt="${paper.title}">
-                            <div class="absolute inset-0 bg-black/20 opacity-0 hover:opacity-100 transition-opacity flex items-center justify-center">
-                                <span class="bg-white/90 px-4 py-2 rounded-full text-xs font-bold uppercase tracking-wider text-black">Read Paper</span>
-                            </div>
-                        </div>
-                        <div class="book-category">${libraryConfig.categories.find(c => c.id === paper.category)?.name || paper.category}</div>
-                        <h3 class="book-title" onclick="window.location.href='${paper.path}'">${paper.title}</h3>
-                        <p class="book-summary">${paper.summary}</p>
-                        
-                        ${paper.podcastUrl ? `
-                        <div onclick="openPodcast('${paper.title}', '${paper.category}', '${paper.podcastUrl}')" class="podcast-link mb-4">
-                            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z"></path></svg>
-                            Listen to Podcast
-                        </div>
-                        ` : ''}
+                renderNextBatch();
+                
+                // Re-add sentinel and loading indicator
+                papersGrid.appendChild(loadingIndicator);
+                papersGrid.appendChild(sentinel);
+                
+                setupIntersectionObserver();
+            }
 
-                        <div class="book-meta">
-                            <span>${new Date(paper.date).toLocaleDateString('id-ID', { year: 'numeric', month: 'long', day: 'numeric' })}</span>
-                            <div class="flex gap-2">
-                                ${paper.tags.slice(0, 2).map(tag => `<span class="bg-gray-100 px-2 py-0.5 rounded text-[10px]">${tag}</span>`).join('')}
+            function renderNextBatch() {
+                if (isLoading) return;
+                
+                const start = (currentPage - 1) * itemsPerPage;
+                const end = start + itemsPerPage;
+                const batch = filteredPapers.slice(start, end);
+                
+                if (batch.length === 0) return;
+
+                isLoading = true;
+                loadingIndicator.classList.remove('hidden');
+
+                // Simulate loading for better UX
+                setTimeout(() => {
+                    batch.forEach((paper, index) => {
+                        const card = document.createElement('div');
+                        card.className = 'book-card fade-in';
+                        // Adjust delay for batch rendering
+                        card.style.animationDelay = `${index * 0.1}s`;
+                        
+                        card.innerHTML = `
+                            <div class="book-cover-container" onclick="window.location.href='${paper.path}'">
+                                <img src="${paper.coverImage}" class="book-cover-img" alt="${paper.title}">
+                                <div class="absolute inset-0 bg-black/20 opacity-0 hover:opacity-100 transition-opacity flex items-center justify-center">
+                                    <span class="bg-white/90 px-4 py-2 rounded-full text-xs font-bold uppercase tracking-wider text-black">Read Paper</span>
+                                </div>
                             </div>
-                        </div>
-                    `;
-                    papersGrid.appendChild(card);
-                });
+                            <div class="book-category">${libraryConfig.categories.find(c => c.id === paper.category)?.name || paper.category}</div>
+                            <h3 class="book-title" onclick="window.location.href='${paper.path}'">${paper.title}</h3>
+                            <p class="book-summary">${paper.summary}</p>
+                            
+                            ${paper.podcastUrl ? `
+                            <div onclick="openPodcast('${paper.title}', '${paper.category}', '${paper.podcastUrl}')" class="podcast-link mb-4">
+                                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z"></path></svg>
+                                Listen to Podcast
+                            </div>
+                            ` : ''}
+
+                            <div class="book-meta">
+                                <span>${new Date(paper.date).toLocaleDateString('id-ID', { year: 'numeric', month: 'long', day: 'numeric' })}</span>
+                                <div class="flex gap-2">
+                                    ${paper.tags.slice(0, 2).map(tag => `<span class="bg-gray-100 px-2 py-0.5 rounded text-[10px]">${tag}</span>`).join('')}
+                                </div>
+                            </div>
+                        `;
+                        // Insert before loadingIndicator
+                        papersGrid.insertBefore(card, loadingIndicator);
+                    });
+
+                    isLoading = false;
+                    loadingIndicator.classList.add('hidden');
+                    currentPage++;
+
+                    // If no more papers, hide sentinel
+                    if (currentPage * itemsPerPage > filteredPapers.length + itemsPerPage) {
+                        sentinel.style.display = 'none';
+                    } else {
+                        sentinel.style.display = 'block';
+                    }
+                }, 800); // Small delay to show the loading state
+            }
+
+            function setupIntersectionObserver() {
+                const observer = new IntersectionObserver((entries) => {
+                    if (entries[0].isIntersecting && !isLoading && (currentPage - 1) * itemsPerPage < filteredPapers.length) {
+                        renderNextBatch();
+                    }
+                }, { threshold: 0.1 });
+
+                observer.observe(sentinel);
             }
 
             // Handle "All Entries" filter click
@@ -506,7 +571,7 @@
                 document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
                 this.classList.add('active');
                 currentFilter = 'all';
-                renderPapers();
+                resetAndRender();
             });
         });
 
@@ -546,5 +611,6 @@
             }, 300);
         }
     </script>
+
 </body>
 </html>

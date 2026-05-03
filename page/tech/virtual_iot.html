@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Virtual IoT Lab: Strategic Blueprint & Research Data</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        /* Custom Chart Container Styling */
+        .chart-container {
+            position: relative;
+            width: 100%;
+            margin-left: auto;
+            margin-right: auto;
+            background-color: white;
+            border-radius: 0.5rem; /* rounded-lg */
+            padding: 1rem;
+            /* Responsive Heights */
+            height: 300px;
+            max-height: 400px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
+
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 350px;
+            }
+        }
+        
+        /* Custom Scrollbar for cleaner look */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1; 
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1; 
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8; 
+        }
+    </style>
+    <!-- 
+        Palette Selection: "Modern Tech & Trust"
+        Primary: #0F172A (Slate 900) - Deep, professional background
+        Accent 1: #3B82F6 (Blue 500) - Trust, Technology
+        Accent 2: #10B981 (Emerald 500) - Success, Validation
+        Accent 3: #F59E0B (Amber 500) - Alerts, Gamification Points
+        Background: #F8FAFC (Slate 50)
+    -->
+    <!--
+        Source Material Analysis & Narrative Plan:
+        1. Introduction: Define the Virtual IoT Lab ecosystem.
+        2. Architecture: Show the technical foundation (Microservices/MQTT).
+        3. Workflow: detailed step-by-step user journey.
+        4. Gamification: Visualizing the "Hook" model and point distribution.
+        5. Admin & Master Data: Hierarchical control and data entities.
+        6. Pricing: Financial modeling for sustainability.
+        7. Testing: QA standards and coverage.
+        
+        Chart Choices:
+        - Architecture: HTML/CSS Flow Diagram (No Mermaid/SVG).
+        - Workflow: CSS Timeline.
+        - Gamification: Radar Chart (Pillars of Engagement), Bar Chart (XP Distribution).
+        - Pricing: Comparative Pricing Tables + Line Chart (Revenue Projection).
+        - Testing: Doughnut Chart (Test Coverage).
+        
+        Confirmations:
+        - NO SVG used.
+        - NO Mermaid JS used.
+        - All icons are Unicode or CSS shapes.
+    -->
+</head>
+<body class="bg-slate-50 text-slate-800 font-sans antialiased">
+
+    <!-- Header Section -->
+    <header class="bg-slate-900 text-white py-12 px-4 sm:px-6 lg:px-8 shadow-xl">
+        <div class="max-w-7xl mx-auto text-center">
+            <h1 class="text-4xl md:text-5xl font-extrabold tracking-tight mb-4">
+                Virtual IoT Lab <span class="text-blue-400">Blueprint</span>
+            </h1>
+            <p class="text-lg md:text-xl text-slate-300 max-w-3xl mx-auto">
+                Comprehensive research data on architecture, pricing models, gamification mechanics, and operational workflows for a next-generation IoT education platform.
+            </p>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8 space-y-20">
+
+        <!-- SECTION 1: SYSTEM ARCHITECTURE -->
+        <section>
+            <div class="mb-8">
+                <h2 class="text-3xl font-bold text-slate-900 border-l-8 border-blue-500 pl-4 mb-2">1. System Architecture</h2>
+                <p class="text-slate-600 text-lg">
+                    A Virtual IoT Lab requires a robust, scalable architecture to handle real-time device simulation. The standard industry approach utilizes a microservices architecture centered around an MQTT Broker for telemetry data.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <!-- Architectural Diagram (CSS Grid/Flex - No SVG) -->
+                <div class="lg:col-span-2 bg-white rounded-lg shadow-md p-6 border border-slate-200">
+                    <h3 class="text-xl font-semibold mb-6 text-slate-700">High-Level Data Flow</h3>
+                    
+                    <div class="flex flex-col md:flex-row gap-4 items-stretch justify-center text-center">
+                        <!-- Client Layer -->
+                        <div class="flex-1 flex flex-col gap-4 p-4 bg-slate-100 rounded border border-slate-300">
+                            <div class="font-bold text-blue-600 mb-2">Client Layer</div>
+                            <div class="bg-white p-3 rounded shadow-sm text-sm">Web Dashboard (React)</div>
+                            <div class="bg-white p-3 rounded shadow-sm text-sm">Virtual Device Simulator</div>
+                            <div class="text-2xl text-slate-400">⬇</div>
+                            <div class="bg-blue-100 p-2 rounded text-xs font-mono text-blue-800">WebSockets / REST API</div>
+                        </div>
+
+                        <!-- Gateway/Broker Layer -->
+                        <div class="flex-none flex flex-col justify-center items-center">
+                             <div class="text-2xl md:rotate-0 rotate-90 text-slate-400">➜</div>
+                        </div>
+
+                        <!-- Core Services -->
+                        <div class="flex-1 flex flex-col gap-4 p-4 bg-blue-50 rounded border border-blue-200">
+                            <div class="font-bold text-blue-700 mb-2">Core Services</div>
+                            <div class="bg-white p-3 rounded shadow-sm text-sm border-l-4 border-amber-400">MQTT Broker (VerneMQ/Mosquitto)</div>
+                            <div class="bg-white p-3 rounded shadow-sm text-sm border-l-4 border-purple-400">Device Manager Service</div>
+                            <div class="bg-white p-3 rounded shadow-sm text-sm border-l-4 border-green-400">Gamification Engine</div>
+                        </div>
+
+                        <!-- Database Layer -->
+                         <div class="flex-none flex flex-col justify-center items-center">
+                             <div class="text-2xl md:rotate-0 rotate-90 text-slate-400">➜</div>
+                        </div>
+
+                        <div class="flex-1 flex flex-col gap-4 p-4 bg-slate-800 rounded text-slate-200">
+                            <div class="font-bold text-slate-100 mb-2">Storage Layer</div>
+                            <div class="bg-slate-700 p-3 rounded shadow-sm text-sm">Timeseries DB (Telemetry)</div>
+                            <div class="bg-slate-700 p-3 rounded shadow-sm text-sm">PostgreSQL (User Data)</div>
+                            <div class="bg-slate-700 p-3 rounded shadow-sm text-sm">Redis (Cache/Session)</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Architecture Stats -->
+                <div class="flex flex-col gap-6">
+                    <div class="bg-white rounded-lg shadow-md p-6">
+                        <h3 class="text-lg font-semibold mb-4 text-slate-700">Latency Requirements</h3>
+                        <p class="text-sm text-slate-500 mb-4">To maintain immersion, the delay between a virtual action (e.g., toggling an LED) and the visual feedback must be minimal.</p>
+                        <div class="chart-container" style="height: 200px;">
+                            <canvas id="latencyChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 2: WORKFLOW & MASTER DATA -->
+        <section>
+            <div class="mb-8">
+                <h2 class="text-3xl font-bold text-slate-900 border-l-8 border-emerald-500 pl-4 mb-2">2. Workflow & Master Data</h2>
+                <p class="text-slate-600 text-lg">
+                    The operational backbone relies on structured Master Data management and a predefined user workflow to ensure scalable administration.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- Master Data Entities -->
+                <div class="bg-white rounded-lg shadow-md p-6">
+                    <h3 class="text-xl font-semibold mb-4 text-slate-700">Master Data Entities</h3>
+                    <p class="text-sm text-slate-500 mb-6">Crucial data structures required for the backend database schema.</p>
+                    
+                    <div class="space-y-4">
+                        <div class="flex items-start">
+                            <div class="flex-shrink-0 h-8 w-8 rounded-full bg-blue-100 flex items-center justify-center text-blue-600 font-bold">U</div>
+                            <div class="ml-4">
+                                <h4 class="text-md font-bold text-slate-800">Users & Roles</h4>
+                                <p class="text-xs text-slate-500">Super Admin, Content Creator, Instructor, Student. Includes Profile, Auth Tokens, Organization ID.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <div class="flex-shrink-0 h-8 w-8 rounded-full bg-green-100 flex items-center justify-center text-green-600 font-bold">D</div>
+                            <div class="ml-4">
+                                <h4 class="text-md font-bold text-slate-800">Virtual Devices</h4>
+                                <p class="text-xs text-slate-500">Device Type (ESP32, Raspberry Pi), Pin Configuration, Firmware Templates, Default State.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <div class="flex-shrink-0 h-8 w-8 rounded-full bg-purple-100 flex items-center justify-center text-purple-600 font-bold">L</div>
+                            <div class="ml-4">
+                                <h4 class="text-md font-bold text-slate-800">Labs & Modules</h4>
+                                <p class="text-xs text-slate-500">Scenario logic, Difficulty Level, Expected Telemetry Output, Passing Criteria.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Administrator Management Flow -->
+                <div class="bg-white rounded-lg shadow-md p-6">
+                    <h3 class="text-xl font-semibold mb-4 text-slate-700">Administrator Hierarchy</h3>
+                    <p class="text-sm text-slate-500 mb-6">Permission distribution strategy.</p>
+                    
+                    <div class="border-l-4 border-slate-300 ml-4 space-y-6">
+                        <div class="relative pl-6">
+                            <div class="absolute -left-3 top-0 bg-slate-800 text-white rounded-full w-6 h-6 flex items-center justify-center text-xs">1</div>
+                            <h4 class="font-bold text-slate-800">Super Admin</h4>
+                            <p class="text-sm text-slate-600">Global config, Tenant management, Billing oversight, System logs access.</p>
+                        </div>
+                        <div class="relative pl-6">
+                            <div class="absolute -left-3 top-0 bg-slate-600 text-white rounded-full w-6 h-6 flex items-center justify-center text-xs">2</div>
+                            <h4 class="font-bold text-slate-800">Course Administrator</h4>
+                            <p class="text-sm text-slate-600">Curriculum design, Master Data entry (Labs/Devices), Instructor assignment.</p>
+                        </div>
+                        <div class="relative pl-6">
+                            <div class="absolute -left-3 top-0 bg-slate-400 text-white rounded-full w-6 h-6 flex items-center justify-center text-xs">3</div>
+                            <h4 class="font-bold text-slate-800">Lab Instructor</h4>
+                            <p class="text-sm text-slate-600">Student progress monitoring, Manual grading, Live assistance, Resetting student sessions.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 3: GAMIFICATION STRATEGY -->
+        <section>
+            <div class="mb-8">
+                <h2 class="text-3xl font-bold text-slate-900 border-l-8 border-amber-500 pl-4 mb-2">3. Ideal Gamification & Challenges</h2>
+                <p class="text-slate-600 text-lg">
+                    To maintain user retention in a technical learning environment, gamification must go beyond simple badges. It requires a balance of competence, autonomy, and relatedness.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
+                <!-- Gamification Pillars Radar Chart -->
+                <div class="bg-white rounded-lg shadow-md p-6">
+                    <h3 class="text-xl font-semibold mb-2 text-slate-700">Core Engagement Pillars</h3>
+                    <p class="text-sm text-slate-500 mb-4">Balancing the user experience metrics.</p>
+                    <div class="chart-container">
+                        <canvas id="gamificationRadar"></canvas>
+                    </div>
+                </div>
+
+                <!-- Challenge Types -->
+                <div class="bg-white rounded-lg shadow-md p-6 flex flex-col justify-center">
+                    <h3 class="text-xl font-semibold mb-4 text-slate-700">Challenge Logic Engine</h3>
+                    <div class="space-y-3">
+                        <div class="p-3 bg-amber-50 border border-amber-200 rounded">
+                            <span class="font-bold text-amber-800 block">Type A: Logic Verification</span>
+                            <span class="text-sm text-slate-600">System checks if the virtual LED turns ON when the virtual Light Sensor reads &lt; 200 lux.</span>
+                        </div>
+                        <div class="p-3 bg-blue-50 border border-blue-200 rounded">
+                            <span class="font-bold text-blue-800 block">Type B: Code Optimization</span>
+                            <span class="text-sm text-slate-600">System measures the execution time or memory usage of the uploaded code script.</span>
+                        </div>
+                        <div class="p-3 bg-purple-50 border border-purple-200 rounded">
+                            <span class="font-bold text-purple-800 block">Type C: Connectivity Debugging</span>
+                            <span class="text-sm text-slate-600">User is given a broken system (incorrect MQTT topic) and must fix the configuration to pass.</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- XP Distribution Chart -->
+            <div class="bg-white rounded-lg shadow-md p-6">
+                <h3 class="text-xl font-semibold mb-4 text-slate-700">XP & Reward Balancing</h3>
+                <p class="text-sm text-slate-500 mb-4">Points should scale exponentially to simulate "levelling up" difficulty.</p>
+                <div class="chart-container" style="height: 300px;">
+                    <canvas id="xpChart"></canvas>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 4: PRICING & PLAN CALCULATION -->
+        <section>
+            <div class="mb-8">
+                <h2 class="text-3xl font-bold text-slate-900 border-l-8 border-purple-600 pl-4 mb-2">4. Pricing Model & Calculations</h2>
+                <p class="text-slate-600 text-lg">
+                    Pricing calculations are based on "Concurrent Virtual Device Instances" (CVDI). Server costs scale linearly with active simulations.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
+                <!-- Free Tier -->
+                <div class="bg-white rounded-lg shadow-md p-6 border-t-4 border-slate-400">
+                    <h3 class="text-2xl font-bold text-slate-800">Starter / Hobby</h3>
+                    <div class="text-4xl font-extrabold text-slate-900 mt-4">$0 <span class="text-base font-normal text-slate-500">/mo</span></div>
+                    <ul class="mt-6 space-y-3 text-sm text-slate-600">
+                        <li class="flex items-center"><span class="mr-2 text-green-500">✓</span> 5 Public Projects</li>
+                        <li class="flex items-center"><span class="mr-2 text-green-500">✓</span> Standard ESP32 Simulator</li>
+                        <li class="flex items-center"><span class="mr-2 text-green-500">✓</span> Community Support</li>
+                        <li class="flex items-center opacity-50"><span class="mr-2 text-slate-400">✗</span> No Private Classes</li>
+                    </ul>
+                </div>
+
+                <!-- Pro Tier -->
+                <div class="bg-slate-900 rounded-lg shadow-xl p-6 border-t-4 border-blue-500 transform scale-105 z-10">
+                    <div class="absolute top-0 right-0 bg-blue-500 text-white text-xs font-bold px-2 py-1 rounded-bl">RECOMMENDED</div>
+                    <h3 class="text-2xl font-bold text-white">Educator Pro</h3>
+                    <div class="text-4xl font-extrabold text-white mt-4">$29 <span class="text-base font-normal text-slate-400">/instructor/mo</span></div>
+                    <ul class="mt-6 space-y-3 text-sm text-slate-300">
+                        <li class="flex items-center"><span class="mr-2 text-blue-400">✓</span> Unlimited Private Labs</li>
+                        <li class="flex items-center"><span class="mr-2 text-blue-400">✓</span> 50 Student Seats Included</li>
+                        <li class="flex items-center"><span class="mr-2 text-blue-400">✓</span> Auto-Grading Engine</li>
+                        <li class="flex items-center"><span class="mr-2 text-blue-400">✓</span> Exportable Gradebook</li>
+                    </ul>
+                </div>
+
+                <!-- Enterprise Tier -->
+                <div class="bg-white rounded-lg shadow-md p-6 border-t-4 border-purple-500">
+                    <h3 class="text-2xl font-bold text-slate-800">Institution</h3>
+                    <div class="text-4xl font-extrabold text-slate-900 mt-4">Custom</div>
+                    <ul class="mt-6 space-y-3 text-sm text-slate-600">
+                        <li class="flex items-center"><span class="mr-2 text-purple-500">✓</span> SSO / LMS Integration</li>
+                        <li class="flex items-center"><span class="mr-2 text-purple-500">✓</span> White-label Domain</li>
+                        <li class="flex items-center"><span class="mr-2 text-purple-500">✓</span> Dedicated Support</li>
+                        <li class="flex items-center"><span class="mr-2 text-purple-500">✓</span> On-premise Deployment Option</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Revenue Chart -->
+             <div class="bg-white rounded-lg shadow-md p-6">
+                <h3 class="text-xl font-semibold mb-4 text-slate-700">Cost vs. Revenue Projection (Per User)</h3>
+                <p class="text-sm text-slate-500 mb-4">Analysis of compute costs (AWS/Azure) vs Subscription Price to determine margin.</p>
+                <div class="chart-container">
+                    <canvas id="pricingChart"></canvas>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 5: TESTING & DOCUMENTATION -->
+        <section>
+            <div class="mb-8">
+                <h2 class="text-3xl font-bold text-slate-900 border-l-8 border-red-500 pl-4 mb-2">5. Testing Standards & Documentation</h2>
+                <p class="text-slate-600 text-lg">
+                    Ensuring platform reliability through rigorous testing protocols and standardized documentation generation.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- Test Coverage Doughnut -->
+                <div class="bg-white rounded-lg shadow-md p-6">
+                    <h3 class="text-xl font-semibold mb-4 text-slate-700">Recommended Test Coverage</h3>
+                    <p class="text-sm text-slate-500 mb-4">Distribution of testing resources for a stable IoT platform.</p>
+                    <div class="chart-container">
+                        <canvas id="testingChart"></canvas>
+                    </div>
+                </div>
+
+                <!-- Documentation Strategy -->
+                <div class="bg-white rounded-lg shadow-md p-6">
+                    <h3 class="text-xl font-semibold mb-4 text-slate-700">Documentation Standard (Diátaxis)</h3>
+                    <p class="text-sm text-slate-500 mb-4">Adopting the Diátaxis framework for technical documentation.</p>
+                    
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="p-4 bg-slate-50 rounded border border-slate-200">
+                            <strong class="block text-slate-800">Tutorials</strong>
+                            <span class="text-xs text-slate-600">Learning-oriented. "How to build your first Smart Home project."</span>
+                        </div>
+                        <div class="p-4 bg-slate-50 rounded border border-slate-200">
+                            <strong class="block text-slate-800">How-To Guides</strong>
+                            <span class="text-xs text-slate-600">Task-oriented. "How to reset an ESP32 simulator."</span>
+                        </div>
+                        <div class="p-4 bg-slate-50 rounded border border-slate-200">
+                            <strong class="block text-slate-800">Reference</strong>
+                            <span class="text-xs text-slate-600">Information-oriented. API Endpoints, Pinout Diagrams.</span>
+                        </div>
+                        <div class="p-4 bg-slate-50 rounded border border-slate-200">
+                            <strong class="block text-slate-800">Explanation</strong>
+                            <span class="text-xs text-slate-600">Understanding-oriented. "How MQTT protocol works."</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="bg-slate-900 text-slate-400 py-8 text-center border-t border-slate-800">
+        <p class="mb-2">Virtual IoT Lab Research & Planning Document</p>
+        <p class="text-sm">Generated by Canvas Infographics AI</p>
+    </footer>
+
+    <!-- SCRIPT SECTION -->
+    <script>
+        // --- UTILITY: Label Wrapping Logic ---
+        function wrapLabel(label, maxChars = 16) {
+            if (label.length <= maxChars) return label;
+            const words = label.split(' ');
+            const lines = [];
+            let currentLine = words[0];
+
+            for (let i = 1; i < words.length; i++) {
+                if ((currentLine + " " + words[i]).length <= maxChars) {
+                    currentLine += " " + words[i];
+                } else {
+                    lines.push(currentLine);
+                    currentLine = words[i];
+                }
+            }
+            lines.push(currentLine);
+            return lines;
+        }
+
+        // --- UTILITY: Common Tooltip Configuration ---
+        const commonTooltipOptions = {
+            callbacks: {
+                title: function(tooltipItems) {
+                    const item = tooltipItems[0];
+                    let label = item.chart.data.labels[item.dataIndex];
+                    if (Array.isArray(label)) {
+                        return label.join(' ');
+                    } else {
+                        return label;
+                    }
+                }
+            }
+        };
+
+        // --- CHART 1: Latency Requirements (Bar Chart) ---
+        const ctxLatency = document.getElementById('latencyChart').getContext('2d');
+        const latencyLabels = ['Local Simulator', 'Cloud (Optimized)', 'Cloud (Standard)', 'Acceptable Limit'];
+        const wrappedLatencyLabels = latencyLabels.map(l => wrapLabel(l));
+
+        new Chart(ctxLatency, {
+            type: 'bar',
+            data: {
+                labels: wrappedLatencyLabels,
+                datasets: [{
+                    label: 'Latency (ms)',
+                    data: [15, 80, 250, 400],
+                    backgroundColor: ['#10B981', '#3B82F6', '#F59E0B', '#EF4444'],
+                    borderRadius: 4
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                indexAxis: 'y', // Horizontal bar for better readability of latency
+                plugins: {
+                    legend: { display: false },
+                    tooltip: commonTooltipOptions
+                },
+                scales: {
+                    x: {
+                        beginAtZero: true,
+                        title: { display: true, text: 'Milliseconds (ms)' }
+                    }
+                }
+            }
+        });
+
+        // --- CHART 2: Gamification Radar (Radar Chart) ---
+        const ctxRadar = document.getElementById('gamificationRadar').getContext('2d');
+        
+        new Chart(ctxRadar, {
+            type: 'radar',
+            data: {
+                labels: ['Technical Skill', 'Problem Solving', 'Social Interaction', 'Consistency', 'Creativity'],
+                datasets: [{
+                    label: 'Ideal Engagement Profile',
+                    data: [90, 85, 60, 75, 50],
+                    fill: true,
+                    backgroundColor: 'rgba(59, 130, 246, 0.2)',
+                    borderColor: 'rgb(59, 130, 246)',
+                    pointBackgroundColor: 'rgb(59, 130, 246)',
+                    pointBorderColor: '#fff',
+                    pointHoverBackgroundColor: '#fff',
+                    pointHoverBorderColor: 'rgb(59, 130, 246)'
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    tooltip: commonTooltipOptions,
+                    legend: { position: 'bottom' }
+                },
+                scales: {
+                    r: {
+                        angleLines: { display: true },
+                        suggestedMin: 0,
+                        suggestedMax: 100
+                    }
+                }
+            }
+        });
+
+        // --- CHART 3: XP Distribution (Line/Bar Combo) ---
+        const ctxXP = document.getElementById('xpChart').getContext('2d');
+        const levels = ['Level 1', 'Level 5', 'Level 10', 'Level 20', 'Level 50'];
+        
+        new Chart(ctxXP, {
+            type: 'line',
+            data: {
+                labels: levels,
+                datasets: [{
+                    label: 'Total XP Required',
+                    data: [100, 1500, 6000, 25000, 150000],
+                    borderColor: '#8B5CF6',
+                    backgroundColor: 'rgba(139, 92, 246, 0.5)',
+                    tension: 0.4,
+                    fill: true
+                },
+                {
+                    label: 'Avg. Challenge Reward',
+                    data: [10, 50, 120, 300, 1000],
+                    type: 'bar',
+                    backgroundColor: '#F59E0B'
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    tooltip: commonTooltipOptions,
+                    title: { display: true, text: 'Progression Curve: Difficulty vs Reward' }
+                },
+                scales: {
+                    y: {
+                        type: 'logarithmic', // Using logarithmic scale due to exponential growth
+                        title: { display: true, text: 'Points (Log Scale)' }
+                    }
+                }
+            }
+        });
+
+        // --- CHART 4: Pricing/Revenue Analysis (Line Chart) ---
+        const ctxPricing = document.getElementById('pricingChart').getContext('2d');
+        const months = ['Month 1', 'Month 3', 'Month 6', 'Month 12'];
+        
+        new Chart(ctxPricing, {
+            type: 'line',
+            data: {
+                labels: months,
+                datasets: [{
+                    label: 'Infrastructure Cost per User ($)',
+                    data: [2.50, 2.40, 2.20, 2.00], // Decreases with scale optimization
+                    borderColor: '#EF4444',
+                    backgroundColor: '#EF4444',
+                    borderDash: [5, 5],
+                    tension: 0.1
+                },
+                {
+                    label: 'Revenue per User ($)',
+                    data: [10.00, 10.00, 12.00, 15.00], // Increases with upsells
+                    borderColor: '#10B981',
+                    backgroundColor: '#10B981',
+                    tension: 0.1
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    tooltip: commonTooltipOptions,
+                    legend: { position: 'top' }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        title: { display: true, text: 'USD ($)' }
+                    }
+                }
+            }
+        });
+
+        // --- CHART 5: Testing Standards (Doughnut) ---
+        const ctxTesting = document.getElementById('testingChart').getContext('2d');
+        const testTypes = ['Unit Testing (Jest)', 'Integration (API)', 'E2E (Cypress/Selenium)', 'Load Testing (K6)', 'Security Audit'];
+        const wrappedTestLabels = testTypes.map(l => wrapLabel(l));
+
+        new Chart(ctxTesting, {
+            type: 'doughnut',
+            data: {
+                labels: wrappedTestLabels,
+                datasets: [{
+                    data: [40, 25, 20, 10, 5], // Standard distribution
+                    backgroundColor: [
+                        '#3B82F6', // Blue - Unit
+                        '#10B981', // Green - Integration
+                        '#F59E0B', // Amber - E2E
+                        '#6366F1', // Indigo - Load
+                        '#EF4444'  // Red - Security
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { position: 'right' },
+                    tooltip: commonTooltipOptions
+                }
+            }
+        });
+
+    </script>
+</body>
+</html>

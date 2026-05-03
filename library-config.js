@@ -21,6 +21,12 @@ const libraryConfig = {
             name: "Economy & Strategy",
             description: "Market analysis, economic projections, and strategic business research.",
             icon: "📊"
+        },
+        {
+            id: "conspiracy",
+            name: "Conspiracy & Investigation",
+            description: "Market analysis, economic projections, and strategic business research.",
+            icon: "🪧"
         }
     ],
     papers: [
@@ -32,7 +38,7 @@ const libraryConfig = {
             summary: "Evaluasi arsitektur Wokwi, Tinkercad, dan Proteus untuk kebutuhan reverse engineering.",
             tags: ["Simulation", "Reverse Engineering", "WebAssembly"],
             coverImage: "https://images.unsplash.com/photo-1517077304055-6e89abbf09b0?auto=format&fit=crop&q=80&w=400",
-            podcastUrl: "https://your-project.supabase.co/storage/v1/object/public/podcasts/simulation.mp3"
+            podcastUrl: "https://bombfbodieaqdbeipcuz.supabase.co/storage/v1/object/public/podcast/Rekayasa%20Balik%20Simulator%20Sirkuit%20Berbasis%20WebAssembly%20(1).mp3"
         },
         {
             title: "S3 Terapan STEM di Indonesia",
@@ -52,7 +58,7 @@ const libraryConfig = {
             summary: "Strategi optimasi performa dan skalabilitas aplikasi SaaS modern.",
             tags: ["SaaS", "Architecture", "Optimization"],
             coverImage: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=400",
-            podcastUrl: ""
+            podcastUrl: "https://bombfbodieaqdbeipcuz.supabase.co/storage/v1/object/public/podcast/Software%20Otonom%20Penuntas%20Hasil%20Kerja.mp3"
         },
         {
             title: "Personal App Ecosystem",
@@ -79,12 +85,31 @@ const libraryConfig = {
             category: "economy",
             path: "page/economy/indonesia_income.html",
             date: "2026-04-15",
-            summary: "Analisis pasar dan strategi untuk membangun side income di era ekonomi digital.",
-            tags: ["Economy", "Strategy", "Digital"],
+            summary: "Strategi adaptasi mahasiswa semester akhir dalam menghadapi disrupsi AI dan tantangan ekonomi digital di Indonesia.",
+            tags: ["Education", "Digital", "Jakarta"],
             coverImage: "https://smartcity.jakarta.go.id/uploads/artikel-cover-image/ebae05a3-a31b-4326-8a26-e65039a8c2bd/SmartSelect_20220418-143508_Chrome.jpe",
             podcastUrl: "https://bombfbodieaqdbeipcuz.supabase.co/storage/v1/object/public/podcast/Software%20Otonom%20Penuntas%20Hasil%20Kerja.mp3"
+        },
+        {
+            title: "Virtual IoT Lab Blueprint",
+            category: "tech",
+            path: "page/tech/virtual_iot.html",
+            date: "2026-05-04",
+            summary: "Blueprint Strategis dan Data Riset untuk Platform Edukasi IoT Virtual.",
+            tags: ["IoT", "Simulation", "Education"],
+            coverImage: "https://thedailyplaniot.com/wp-content/uploads/2021/09/iot-design.png",
+            podcastUrl: "https://bombfbodieaqdbeipcuz.supabase.co/storage/v1/object/public/podcast/Virtual%20IoT%20Labs%20Replace%20Physical%20Workbenches%20(1).mp3"
+        },
+        {
+            title: "Analisis Data: Mengungkap Isi Dokumen Epstein",
+            category: "conspiracy",
+            path: "page/conspiracy/epstein_research.html",
+            date: "2026-05-05",
+            summary: "Analisis Data: Mengungkap Isi Dokumen Epstein.",
+            tags: ["Conspiracy", "Data", "Research"],
+            coverImage: "https://m.media-amazon.com/images/I/614PBUiwIRL._AC_UF1000,1000_QL80_.jpg",
+            podcastUrl: "https://bombfbodieaqdbeipcuz.supabase.co/storage/v1/object/public/podcast/Skandal%20Seks%20dan%20Kekuasaan%20Berkas%20Epstein.mp3"
         }
-
     ]
 };
 
