@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lanskap Ekonomi & Kripto 2026</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+tailwind.config = {
+theme: {
+extend: {
+colors: {
+brand: {
+purple: '#8b5cf6',
+teal: '#14b8a6',
+orange: '#f97316',
+yellow: '#eab308',
+blue: '#1e3a8a',
+dark: '#0f172a',
+light: '#f8fafc'
+}
+}
+}
+}
+}
+</script>
+<style>
+body {
+background-color: #f8fafc;
+color: #0f172a;
+font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+}
+.chart-container {
+position: relative;
+width: 100%;
+max-width: 100%;
+margin: 0 auto;
+height: 320px;
+max-height: 400px;
+}
+@media (min-width: 768px) {
+.chart-container {
+height: 380px;
+}
+}
+.stat-card {
+background: white;
+border-radius: 1rem;
+box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+.stat-card:hover {
+transform: translateY(-4px);
+box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+.gradient-text {
+background: linear-gradient(to right, #8b5cf6, #14b8a6);
+-webkit-background-clip: text;
+-webkit-text-fill-color: transparent;
+}
+.process-node {
+display: flex;
+align-items: center;
+justify-content: center;
+width: 3rem;
+height: 3rem;
+border-radius: 9999px;
+color: white;
+font-weight: bold;
+font-size: 1.25rem;
+}
+</style>
+</head>
+<body class="antialiased">
+
+<header class="bg-white shadow-sm sticky top-0 z-50 border-b-4 border-brand-purple">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+<h1 class="text-3xl md:text-4xl font-extrabold text-brand-dark tracking-tight">
+Laporan Eksekutif: <span class="gradient-text">Ekonomi & Kripto 2026</span>
+</h1>
+<p class="mt-2 text-sm md:text-base text-gray-600 font-medium">
+Analisis komprehensif lanskap makroekonomi dan peluang aset digital per Mei 2026.
+</p>
+</div>
+</header>
+
+<main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+
+<section class="mb-12">
+<div class="mb-6">
+<h2 class="text-2xl font-bold text-brand-dark flex items-center gap-2">
+<span class="text-brand-orange text-3xl">&#127976;</span> Ringkasan Makroekonomi
+</h2>
+<p class="mt-2 text-gray-600">
+Perekonomian global saat ini menunjukkan tanda-tanda stabilisasi pasca-volatilitas tahun 2024-2025. Di tingkat domestik, inflasi yang terkendali memberikan ruang bagi kebijakan moneter yang lebih akomodatif, menciptakan lingkungan yang kondusif untuk aset berisiko.
+</p>
+</div>
+
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+<div class="stat-card p-6 border-l-4 border-brand-teal">
+<p class="text-sm font-semibold text-gray-500 uppercase tracking-wide">Inflasi Domestik (YoY)</p>
+<div class="mt-2 flex items-baseline gap-2">
+<span class="text-4xl font-extrabold text-brand-dark">2.8%</span>
+<span class="text-sm font-medium text-green-600 bg-green-100 px-2 py-0.5 rounded">&#8595; Terkendali</span>
+</div>
+<p class="mt-2 text-sm text-gray-600">Berada dalam rentang target bank sentral, mendukung stabilitas daya beli.</p>
+</div>
+
+<div class="stat-card p-6 border-l-4 border-brand-purple">
+<p class="text-sm font-semibold text-gray-500 uppercase tracking-wide">Suku Bunga Acuan (BI Rate)</p>
+<div class="mt-2 flex items-baseline gap-2">
+<span class="text-4xl font-extrabold text-brand-dark">5.50%</span>
+<span class="text-sm font-medium text-gray-600 bg-gray-100 px-2 py-0.5 rounded">&#8594; Ditahan</span>
+</div>
+<p class="mt-2 text-sm text-gray-600">Fokus pada stabilisasi nilai tukar di tengah dinamika global.</p>
+</div>
+
+<div class="stat-card p-6 border-l-4 border-brand-orange">
+<p class="text-sm font-semibold text-gray-500 uppercase tracking-wide">Pertumbuhan PDB (Q1 2026)</p>
+<div class="mt-2 flex items-baseline gap-2">
+<span class="text-4xl font-extrabold text-brand-dark">5.1%</span>
+<span class="text-sm font-medium text-green-600 bg-green-100 px-2 py-0.5 rounded">&#8593; Menguat</span>
+</div>
+<p class="mt-2 text-sm text-gray-600">Didorong oleh konsumsi domestik dan adopsi teknologi digital.</p>
+</div>
+</div>
+
+<div class="stat-card p-6">
+<h3 class="text-lg font-bold text-brand-dark mb-4">Tren Suku Bunga vs Inflasi (2025 - 2026)</h3>
+<p class="text-sm text-gray-600 mb-6">Visualisasi ini menunjukkan bagaimana kebijakan pengetatan sebelumnya telah berhasil menurunkan inflasi, membuka jalan bagi potensi pelonggaran kuantitatif yang menguntungkan pasar saham dan kripto.</p>
+<div class="chart-container">
+<canvas id="macroChart"></canvas>
+</div>
+</div>
+</section>
+
+<section class="mb-12">
+<div class="mb-6">
+<h2 class="text-2xl font-bold text-brand-dark flex items-center gap-2">
+<span class="text-brand-purple text-3xl">&#128187;</span> Lanskap & Peluang Kripto 2026
+</h2>
+<p class="mt-2 text-gray-600">
+Pasar aset digital telah memasuki fase kedewasaan baru. Integrasi kecerdasan buatan (AI) dengan blockchain, serta tokenisasi aset dunia nyata (RWA), menjadi katalis utama pertumbuhan arus modal institusional di tahun 2026.
+</p>
+</div>
+
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+<div class="stat-card p-6">
+<h3 class="text-lg font-bold text-brand-dark mb-4">Distribusi Dominasi Pasar Kripto</h3>
+<p class="text-sm text-gray-600 mb-6">Bitcoin tetap mendominasi, namun sektor RWA dan DePIN (Decentralized Physical Infrastructure Networks) merebut pangsa pasar signifikan dari altcoin tradisional.</p>
+<div class="chart-container">
+<canvas id="cryptoMarketChart"></canvas>
+</div>
+</div>
+
+<div class="stat-card p-6">
+<h3 class="text-lg font-bold text-brand-dark mb-4">Proyeksi Pertumbuhan Sektor Web3 (YoY)</h3>
+<p class="text-sm text-gray-600 mb-6">Sektor yang menggabungkan utilitas dunia nyata menunjukkan traksi tertinggi. RWA dan AI terdesentralisasi memimpin metrik pendanaan kuartal ini.</p>
+<div class="chart-container">
+<canvas id="sectorGrowthChart"></canvas>
+</div>
+</div>
+</div>
+</section>
+
+<section class="mb-12">
+<div class="mb-6">
+<h2 class="text-2xl font-bold text-brand-dark flex items-center gap-2">
+<span class="text-brand-teal text-3xl">&#128200;</span> Analisis Arus Modal
+</h2>
+<p class="mt-2 text-gray-600">
+Pergerakan likuiditas global menunjukkan rotasi dari aset safe-haven tradisional menuju instrumen digital berimbal hasil tinggi yang teregulasi.
+</p>
+</div>
+
+<div class="stat-card p-6 mb-8">
+<h3 class="text-lg font-bold text-brand-dark mb-4">Volume Institusional di Aset Kripto Teratas (Miliar USD)</h3>
+<p class="text-sm text-gray-600 mb-6">Persetujuan ETF berlapis secara global telah memicu akumulasi institusional yang konsisten, mengurangi volatilitas historis pasar kripto.</p>
+<div class="chart-container">
+<canvas id="volumeChart"></canvas>
+</div>
+</div>
+
+<div class="stat-card p-6 bg-brand-dark text-white">
+<h3 class="text-xl font-bold text-brand-yellow mb-6">Alur Adopsi Institusional 2026</h3>
+<div class="flex flex-col md:flex-row items-center justify-between gap-4">
+
+<div class="flex flex-col items-center text-center w-full md:w-1/4">
+<div class="process-node bg-brand-purple shadow-lg shadow-brand-purple/50 mb-3">&#128269;</div>
+<h4 class="font-bold text-lg text-brand-light">Kejelasan Regulasi</h4>
+<p class="text-xs text-gray-400 mt-2">Kerangka kerja hukum MiCA dan pedoman SEC yang lebih jelas diterapkan.</p>
+</div>
+
+<div class="hidden md:flex flex-col items-center justify-center w-8">
+<span class="text-brand-teal text-3xl">&#10142;</span>
+</div>
+<div class="flex md:hidden flex-col items-center justify-center h-8">
+<span class="text-brand-teal text-3xl transform rotate-90">&#10142;</span>
+</div>
+
+<div class="flex flex-col items-center text-center w-full md:w-1/4">
+<div class="process-node bg-brand-teal shadow-lg shadow-brand-teal/50 mb-3">&#127974;</div>
+<h4 class="font-bold text-lg text-brand-light">Infrastruktur TradFi</h4>
+<p class="text-xs text-gray-400 mt-2">Bank tier-1 meluncurkan layanan kustodi aset digital mandiri.</p>
+</div>
+
+<div class="hidden md:flex flex-col items-center justify-center w-8">
+<span class="text-brand-teal text-3xl">&#10142;</span>
+</div>
+<div class="flex md:hidden flex-col items-center justify-center h-8">
+<span class="text-brand-teal text-3xl transform rotate-90">&#10142;</span>
+</div>
+
+<div class="flex flex-col items-center text-center w-full md:w-1/4">
+<div class="process-node bg-brand-orange shadow-lg shadow-brand-orange/50 mb-3">&#128176;</div>
+<h4 class="font-bold text-lg text-brand-light">Arus Masuk Masif</h4>
+<p class="text-xs text-gray-400 mt-2">Dana pensiun dan sovereign wealth fund mengalokasikan 1-3% ke kripto.</p>
+</div>
+
+</div>
+</div>
+</section>
+
+</main>
+
+<footer class="bg-white border-t border-gray-200 mt-12 py-8 text-center text-gray-500 text-sm">
+<p>&copy; 2026 Dasbor Analitik Ekonomi Makro & Aset Digital. Data disimulasikan untuk tujuan visualisasi.</p>
+</footer>
+
+<script>
+const wrapLabelText = (text) => {
+if (typeof text !== 'string' || text.length <= 16) return text;
+const words = text.split(' ');
+let lines = [];
+let currentLine = '';
+for (let i = 0; i < words.length; i++) {
+let word = words[i];
+if ((currentLine + word).length > 16) {
+if (currentLine.length > 0) {
+lines.push(currentLine.trim());
+}
+currentLine = word + ' ';
+} else {
+currentLine += word + ' ';
+}
+}
+if (currentLine.trim().length > 0) {
+lines.push(currentLine.trim());
+}
+return lines;
+};
+
+const commonTooltipConfig = {
+tooltip: {
+callbacks: {
+title: function(tooltipItems) {
+const item = tooltipItems[0];
+let label = item.chart.data.labels[item.dataIndex];
+if (Array.isArray(label)) {
+return label.join(' ');
+} else {
+return label;
+}
+}
+}
+}
+};
+
+const labelsMacro = ['Q1 2025', 'Q2 2025', 'Q3 2025', 'Q4 2025', 'Q1 2026', 'Q2 2026 (Est)'];
+const dataInflasi = [4.2, 3.8, 3.2, 3.0, 2.8, 2.6];
+const dataSukuBunga = [6.0, 6.0, 5.75, 5.75, 5.5, 5.25];
+
+new Chart(document.getElementById('macroChart'), {
+type: 'line',
+data: {
+labels: labelsMacro.map(wrapLabelText),
+datasets: [
+{
+label: 'Tingkat Inflasi (%)',
+data: dataInflasi,
+borderColor: '#f97316',
+backgroundColor: 'rgba(249, 115, 22, 0.1)',
+borderWidth: 3,
+tension: 0.4,
+fill: true
+},
+{
+label: 'Suku Bunga BI (%)',
+data: dataSukuBunga,
+borderColor: '#1e3a8a',
+backgroundColor: 'transparent',
+borderWidth: 3,
+borderDash: [5, 5],
+tension: 0.1
+}
+]
+},
+options: {
+responsive: true,
+maintainAspectRatio: false,
+plugins: {
+legend: { position: 'top' },
+...commonTooltipConfig
+},
+scales: {
+y: { min: 0, max: 7, grid: { color: '#f1f5f9' } },
+x: { grid: { display: false } }
+}
+}
+});
+
+const labelsCrypto = ['Bitcoin (BTC)', 'Ethereum & L2s', 'Tokenisasi RWA', 'Sektor DePIN', 'Altcoins Lainnya'];
+const dataCrypto = [48, 22, 12, 10, 8];
+
+new Chart(document.getElementById('cryptoMarketChart'), {
+type: 'doughnut',
+data: {
+labels: labelsCrypto.map(wrapLabelText),
+datasets: [{
+data: dataCrypto,
+backgroundColor: [
+'#eab308', 
+'#8b5cf6', 
+'#14b8a6', 
+'#f97316', 
+'#94a3b8'  
+],
+borderWidth: 0,
+hoverOffset: 4
+}]
+},
+options: {
+responsive: true,
+maintainAspectRatio: false,
+cutout: '65%',
+plugins: {
+legend: { position: 'right' },
+...commonTooltipConfig
+}
+}
+});
+
+const labelsSector = ['Kecerdasan Buatan (AI) & Kripto', 'Infrastruktur RWA', 'Gaming Web3', 'Keuangan Terdesentralisasi (DeFi)', 'NFTs Tradisional'];
+const dataSector = [145, 112, 45, 18, -15];
+
+new Chart(document.getElementById('sectorGrowthChart'), {
+type: 'bar',
+data: {
+labels: labelsSector.map(wrapLabelText),
+datasets: [{
+label: 'Pertumbuhan YoY (%)',
+data: dataSector,
+backgroundColor: dataSector.map(val => val > 0 ? '#14b8a6' : '#ef4444'),
+borderRadius: 6
+}]
+},
+options: {
+indexAxis: 'y',
+responsive: true,
+maintainAspectRatio: false,
+plugins: {
+legend: { display: false },
+...commonTooltipConfig
+},
+scales: {
+x: { grid: { color: '#f1f5f9' } },
+y: { grid: { display: false } }
+}
+}
+});
+
+const labelsVolume = ['Jan 2026', 'Feb 2026', 'Mar 2026', 'Apr 2026', 'Mei 2026'];
+const dataBTCVol = [450, 520, 680, 710, 850];
+const dataETHVol = [210, 280, 390, 420, 510];
+
+new Chart(document.getElementById('volumeChart'), {
+type: 'line',
+data: {
+labels: labelsVolume.map(wrapLabelText),
+datasets: [
+{
+label: 'Bitcoin Institusional',
+data: dataBTCVol,
+borderColor: '#eab308',
+backgroundColor: 'rgba(234, 179, 8, 0.2)',
+borderWidth: 2,
+fill: true,
+tension: 0.4
+},
+{
+label: 'Ethereum Institusional',
+data: dataETHVol,
+borderColor: '#8b5cf6',
+backgroundColor: 'rgba(139, 92, 246, 0.2)',
+borderWidth: 2,
+fill: true,
+tension: 0.4
+}
+]
+},
+options: {
+responsive: true,
+maintainAspectRatio: false,
+plugins: {
+legend: { position: 'top' },
+...commonTooltipConfig
+},
+scales: {
+y: { stacked: true, grid: { color: '#f1f5f9' } },
+x: { grid: { display: false } }
+}
+}
+});
+</script>
+</body>
+</html>

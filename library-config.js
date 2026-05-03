@@ -104,11 +104,21 @@ const libraryConfig = {
             title: "Analisis Data: Mengungkap Isi Dokumen Epstein",
             category: "conspiracy",
             path: "page/conspiracy/epstein_research.html",
-            date: "2026-05-05",
+            date: "2026-05-03",
             summary: "Analisis Data: Mengungkap Isi Dokumen Epstein.",
             tags: ["Conspiracy", "Data", "Research"],
             coverImage: "https://m.media-amazon.com/images/I/614PBUiwIRL._AC_UF1000,1000_QL80_.jpg",
             podcastUrl: "https://bombfbodieaqdbeipcuz.supabase.co/storage/v1/object/public/podcast/Skandal%20Seks%20dan%20Kekuasaan%20Berkas%20Epstein.mp3"
+        },
+        {
+            title: "Lanskap Ekonomi & Kripto 2026",
+            category: "economy",
+            path: "page/economy/crypto_ex.html",
+            date: "2026-05-03",
+            summary: "Lanskap Ekonomi & Kripto 2026.",
+            tags: ["Economy", "Crypto", "Finance"],
+            coverImage: "https://s3.tradingview.com/news/image/invezz:c6b6cf277094b-62971483c07f665e369f9732d0042d67-resized.webp",
+            podcastUrl: "https://bombfbodieaqdbeipcuz.supabase.co/storage/v1/object/public/podcast/Ekonomi%20&%20Kripto%20Sep.%202025_%20Gejolak%20Global,%20Indonesia%20Tangguh,%20dan%20Transformasi%20Utilitas%20Kripto%20(RWA,%20ReFi,%20ZKP)"
         }
     ]
 };
