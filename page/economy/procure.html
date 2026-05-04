@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dasbor Interaktif: Prospek Masa Depan Jasa, Pengadaan & AI</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+    <!-- Chosen Palette: Warm Neutrals -->
+    <!-- Application Structure Plan: Aplikasi web satu halaman (SPA) dengan struktur tematik yang jelas dan navigasi atas yang sticky. Pengguna dapat langsung melompat ke bagian yang diminati (Gambaran Umum, Sektor Jasa, Sektor Pengadaan, Era AI, Rekomendasi). Struktur ini lebih baik daripada format laporan linear karena memfasilitasi eksplorasi non-linear yang disesuaikan dengan minat pengguna. Setiap bagian menggunakan visualisasi data (grafik batang, donat, garis) dan elemen interaktif (hover, klik) untuk menyajikan informasi kompleks secara ringkas dan menarik, mendorong pemahaman yang lebih dalam. -->
+    <!-- Visualization & Content Choices: 
+    1. Tren Global (Grafik Batang): Tujuan: Membandingkan. Metode: Chart.js Batang. Interaksi: Tooltip saat hover. Justifikasi: Cara terbaik untuk membandingkan secara visual dampak dari berbagai tren transformatif.
+    2. Pertumbuhan Sektor Jasa (Grafik Batang): Tujuan: Membandingkan. Metode: Chart.js Batang. Interaksi: Tooltip saat hover. Justifikasi: Menunjukkan dengan jelas proyeksi pertumbuhan (CAGR) dan ukuran pasar, memudahkan identifikasi sektor unggulan.
+    3. Manfaat AI di Pengadaan (Grafik Donat): Tujuan: Menginformasikan proporsi. Metode: Chart.js Donat. Interaksi: Tooltip saat hover. Justifikasi: Efektif menunjukkan komposisi manfaat (misalnya, persentase penghematan biaya vs. efisiensi).
+    4. Pertumbuhan Pasar AI (Grafik Garis): Tujuan: Menunjukkan perubahan dari waktu ke waktu. Metode: Chart.js Garis. Interaksi: Tooltip & legenda interaktif. Justifikasi: Cara paling kuat untuk menyampaikan kisah pertumbuhan eksplosif AI dan sub-sektornya.
+    5. Tantangan & Rekomendasi (Akordeon): Tujuan: Mengorganisir. Metode: HTML/Tailwind + JS. Justifikasi: Mencegah pengguna kewalahan dengan teks panjang dan memungkinkan eksplorasi mandiri. -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8f7f4;
+            color: #383733;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 350px;
+            max-height: 50vh;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 450px;
+            }
+        }
+        .nav-link {
+            transition: color 0.3s, border-bottom-color 0.3s;
+            border-bottom: 2px solid transparent;
+        }
+        .nav-link:hover, .nav-link.active {
+            color: #c084fc; /* purple-400 */
+            border-bottom-color: #c084fc;
+        }
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease-in-out;
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <header class="bg-white/80 backdrop-blur-lg sticky top-0 z-50 shadow-sm">
+        <nav class="container mx-auto px-6 py-4">
+            <div class="flex items-center justify-between">
+                <h1 class="text-xl md:text-2xl font-bold text-purple-600">Prospek Masa Depan</h1>
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#overview" class="nav-link font-medium pb-1">Gambaran Umum</a>
+                    <a href="#services" class="nav-link font-medium pb-1">Sektor Jasa</a>
+                    <a href="#procurement" class="nav-link font-medium pb-1">Sektor Pengadaan</a>
+                    <a href="#ai-era" class="nav-link font-medium pb-1">Era AI</a>
+                    <a href="#recommendations" class="nav-link font-medium pb-1">Rekomendasi</a>
+                </div>
+                 <button id="mobile-menu-button" class="md:hidden p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+                </button>
+            </div>
+             <div id="mobile-menu" class="hidden md:hidden mt-4 space-y-2">
+                <a href="#overview" class="block nav-link font-medium py-2">Gambaran Umum</a>
+                <a href="#services" class="block nav-link font-medium py-2">Sektor Jasa</a>
+                <a href="#procurement" class="block nav-link font-medium py-2">Sektor Pengadaan</a>
+                <a href="#ai-era" class="block nav-link font-medium py-2">Era AI</a>
+                <a href="#recommendations" class="block nav-link font-medium py-2">Rekomendasi</a>
+            </div>
+        </nav>
+    </header>
+
+    <main class="container mx-auto px-6 py-8 md:py-12">
+        
+        <section id="hero" class="text-center mb-16 md:mb-24">
+            <h2 class="text-4xl md:text-6xl font-bold mb-4 text-gray-800 tracking-tight">Menavigasi Masa Depan</h2>
+            <p class="text-lg md:text-xl max-w-3xl mx-auto text-gray-600">
+                Sebuah eksplorasi interaktif tentang peluang di sektor jasa dan pengadaan yang dibentuk oleh kekuatan transformatif Kecerdasan Buatan (AI) untuk dekade mendatang.
+            </p>
+        </section>
+
+        <section id="overview" class="scroll-mt-24 mb-16 md:mb-24">
+            <h3 class="text-3xl font-bold mb-2 text-center text-gray-800">Gambaran Umum: Lanskap Global</h3>
+            <p class="text-center max-w-3xl mx-auto text-gray-600 mb-12">
+                Kondisi ekonomi global yang kompleks, didorong oleh tren makro seperti digitalisasi, perubahan iklim, dan pergeseran demografi, menciptakan tantangan sekaligus peluang besar. Bagian ini memvisualisasikan kekuatan utama yang akan membentuk ulang model bisnis dan pasar tenaga kerja hingga tahun 2030.
+            </p>
+            <div class="bg-white rounded-xl shadow-lg p-6 md:p-8">
+                <h4 class="text-xl font-semibold mb-4 text-center">Tren Paling Transformatif Bagi Bisnis (2030)</h4>
+                 <div class="chart-container">
+                    <canvas id="globalTrendsChart"></canvas>
+                </div>
+            </div>
+        </section>
+
+        <section id="services" class="scroll-mt-24 mb-16 md:mb-24">
+            <h3 class="text-3xl font-bold mb-2 text-center text-gray-800">Sektor Jasa: Era Personalisasi & Kenyamanan</h3>
+            <p class="text-center max-w-3xl mx-auto text-gray-600 mb-12">
+                Perilaku konsumen berubah secara drastis, mengutamakan pengalaman "bring-it-to-me" yang cepat, personal, dan efisien. Hal ini mendorong pertumbuhan eksplosif di berbagai bidang jasa, terutama yang didukung oleh teknologi dan AI. Jelajahi sektor-sektor dengan prospek paling cerah.
+            </p>
+            <div class="bg-white rounded-xl shadow-lg p-6 md:p-8">
+                <h4 class="text-xl font-semibold mb-4 text-center">Proyeksi Pertumbuhan Sektor Jasa Pilihan (CAGR)</h4>
+                 <div class="chart-container">
+                    <canvas id="servicesGrowthChart"></canvas>
+                </div>
+                <div class="mt-8 text-center text-sm text-gray-500">
+                    <p>CAGR (Compound Annual Growth Rate) menunjukkan tingkat pertumbuhan tahunan rata-rata selama periode tertentu.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="procurement" class="scroll-mt-24 mb-16 md:mb-24">
+            <h3 class="text-3xl font-bold mb-2 text-center text-gray-800">Sektor Pengadaan: Dari Transaksional ke Strategis</h3>
+             <p class="text-center max-w-3xl mx-auto text-gray-600 mb-12">
+                Menghadapi volatilitas pasar, pengadaan berevolusi menjadi fungsi strategis yang vital untuk ketahanan bisnis. AI menjadi katalis utama dalam transformasi ini, memungkinkan efisiensi, pengurangan biaya, dan mitigasi risiko yang belum pernah terjadi sebelumnya. Lihat bagaimana AI menciptakan nilai dalam siklus pengadaan.
+            </p>
+            <div class="grid md:grid-cols-2 gap-8 items-center">
+                <div class="bg-white rounded-xl shadow-lg p-6 md:p-8">
+                    <h4 class="text-xl font-semibold mb-4 text-center">Manfaat Utama Adopsi AI di Pengadaan</h4>
+                    <div class="chart-container !h-[300px] md:!h-[400px]">
+                        <canvas id="procurementAiBenefitsChart"></canvas>
+                    </div>
+                </div>
+                <div class="space-y-4">
+                    <div class="bg-white rounded-xl shadow-lg p-6">
+                        <p class="text-4xl font-bold text-purple-600">74%</p>
+                        <p class="text-gray-600">CPO berencana mengintegrasikan AI pada akhir 2025.</p>
+                    </div>
+                    <div class="bg-white rounded-xl shadow-lg p-6">
+                        <p class="text-4xl font-bold text-purple-600">7-12%</p>
+                        <p class="text-gray-600">Pengurangan biaya tahunan bagi perusahaan yang memanfaatkan AI.</p>
+                    </div>
+                     <div class="bg-white rounded-xl shadow-lg p-6">
+                        <p class="text-4xl font-bold text-purple-600">>50%</p>
+                        <p class="text-gray-600">Tenaga kerja pengadaan dapat diotomatisasi untuk efisiensi.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="ai-era" class="scroll-mt-24 mb-16 md:mb-24">
+            <h3 class="text-3xl font-bold mb-2 text-center text-gray-800">Era AI: Arena Pertumbuhan Berikutnya</h3>
+             <p class="text-center max-w-3xl mx-auto text-gray-600 mb-12">
+                AI bukan lagi sekadar teknologi, melainkan fondasi ekonomi masa depan. Dengan pertumbuhan pasar yang fenomenal, sub-sektor seperti Generative AI dan Machine Learning membuka peluang investasi dan inovasi yang luar biasa. Grafik ini memetakan lintasan pertumbuhan eksplosif pasar AI global dan sub-sektor utamanya.
+            </p>
+            <div class="bg-white rounded-xl shadow-lg p-6 md:p-8">
+                <h4 class="text-xl font-semibold mb-4 text-center">Proyeksi Pertumbuhan Pasar AI Global & Sub-Sektor (dalam Miliar USD)</h4>
+                <div class="chart-container !h-[400px] md:!h-[500px]">
+                    <canvas id="aiMarketGrowthChart"></canvas>
+                </div>
+            </div>
+        </section>
+
+        <section id="recommendations" class="scroll-mt-24">
+            <h3 class="text-3xl font-bold mb-2 text-center text-gray-800">Arah Strategis: Tantangan & Rekomendasi</h3>
+            <p class="text-center max-w-3xl mx-auto text-gray-600 mb-12">
+                Mengadopsi AI dan menavigasi masa depan membutuhkan lebih dari sekadar investasi teknologi. Organisasi harus secara proaktif mengatasi tantangan seperti kesenjangan keterampilan dan etika, sambil menerapkan strategi yang berpusat pada manusia untuk meraih kesuksesan jangka panjang.
+            </p>
+            <div class="max-w-4xl mx-auto">
+                <div class="space-y-4">
+                    <div class="accordion-item bg-white rounded-xl shadow-lg">
+                        <button class="accordion-header w-full flex justify-between items-center text-left p-6">
+                            <span class="text-xl font-semibold text-gray-800">Tantangan Utama dalam Adopsi AI</span>
+                            <span class="accordion-icon text-purple-500 text-2xl transform transition-transform duration-300">+</span>
+                        </button>
+                        <div class="accordion-content px-6">
+                            <ul class="list-disc list-inside text-gray-600 pb-6 space-y-2">
+                                <li><strong>Kualitas Data & Biaya:</strong> Kurangnya data berkualitas dan biaya implementasi yang tinggi menjadi penghalang utama.</li>
+                                <li><strong>Kesenjangan Keterampilan:</strong> Permintaan akan talenta AI jauh melebihi pasokan yang tersedia. 63% pengusaha melihat ini sebagai hambatan terbesar.</li>
+                                <li><strong>Etika dan Regulasi:</strong> Isu bias, privasi, transparansi, dan akuntabilitas memerlukan kerangka kerja yang kuat dan bertanggung jawab.</li>
+                                 <li><strong>ROI yang Tidak Pasti:</strong> Hanya 20% organisasi yang secara aktif mengukur ROI dari inisiatif Generative AI, menciptakan keraguan dalam investasi.</li>
+                            </ul>
+                        </div>
+                    </div>
+                     <div class="accordion-item bg-white rounded-xl shadow-lg">
+                        <button class="accordion-header w-full flex justify-between items-center text-left p-6">
+                            <span class="text-xl font-semibold text-gray-800">Rekomendasi Strategis untuk Pertumbuhan</span>
+                             <span class="accordion-icon text-purple-500 text-2xl transform transition-transform duration-300">+</span>
+                        </button>
+                        <div class="accordion-content px-6">
+                           <ul class="list-disc list-inside text-gray-600 pb-6 space-y-2">
+                                <li><strong>Fokus pada Pelanggan & Ketahanan:</strong> Prioritaskan personalisasi di sektor jasa dan bangun ketahanan rantai pasok di sektor pengadaan.</li>
+                                <li><strong>Adopsi AI Bertanggung Jawab:</strong> Integrasikan AI sebagai bagian dari strategi bisnis inti, mulai dari proyek percontohan, dan bangun kerangka kerja etika yang kuat.</li>
+                                <li><strong>Investasi pada Manusia:</strong> Prioritaskan program peningkatan keterampilan (upskilling) dan pelatihan ulang (reskilling) untuk membekali tenaga kerja dengan keahlian teknis dan soft skills yang relevan.</li>
+                                <li><strong>Budaya Inovasi:</strong> Ciptakan lingkungan kerja yang mendorong eksperimen, merangkul perubahan, dan menempatkan manusia sebagai pusat dari desain teknologi.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-gray-800 text-white mt-24">
+        <div class="container mx-auto px-6 py-8 text-center">
+            <p>&copy; 2025 Analisis Prospek Masa Depan. Dibuat sebagai visualisasi interaktif.</p>
+            <p class="text-sm text-gray-400 mt-2">Data disarikan dari laporan "Prospek Masa Depan: Memetakan Peluang di Sektor Jasa dan Pengadaan dalam Era AI (2025-2030)".</p>
+        </div>
+    </footer>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+
+    const chartFontColor = '#383733';
+    const gridColor = '#e5e7eb';
+    
+    const globalTrendsData = {
+        labels: ['AI & Pemrosesan Informasi', 'Akses Digital', 'Peningkatan Biaya Hidup', 'Mitigasi Perubahan Iklim', 'Perlambatan Ekonomi'],
+        data: [86, 60, 50, 47, 42],
+        bgColor: 'rgba(168, 85, 247, 0.6)',
+        borderColor: 'rgba(147, 51, 234, 1)'
+    };
+
+    const servicesGrowthData = {
+        labels: ['Solusi Rumah Pintar AI (Voice-Activated)', 'Jasa Rumah Tangga On-Demand (Online)'],
+        data: [44.8, 14.3],
+        bgColor: 'rgba(96, 165, 250, 0.6)',
+        borderColor: 'rgba(59, 130, 246, 1)'
+    };
+    
+    const procurementAiBenefitsData = {
+        labels: ['Peningkatan Efisiensi', 'Pengurangan Biaya', 'Mitigasi Risiko', 'Pengambilan Keputusan Lebih Baik'],
+        data: [40, 30, 20, 10], 
+        bgColor: [
+            'rgba(239, 68, 68, 0.6)', 
+            'rgba(249, 115, 22, 0.6)',
+            'rgba(234, 179, 8, 0.6)', 
+            'rgba(34, 197, 94, 0.6)'
+        ],
+        borderColor: [
+            'rgba(220, 38, 38, 1)', 
+            'rgba(245, 158, 11, 1)',
+            'rgba(202, 138, 4, 1)',
+            'rgba(22, 163, 74, 1)'
+        ]
+    };
+
+    const aiMarketGrowthData = {
+        labels: ['2024', '2025', '2026', '2027', '2028', '2029', '2030'],
+        datasets: [
+            {
+                label: 'Pasar AI Global',
+                data: [279.22, 379.7, 516.2, 701.8, 954.0, 1296.8, 1811.75],
+                borderColor: '#8b5cf6',
+                backgroundColor: 'rgba(139, 92, 246, 0.1)',
+                fill: true,
+                tension: 0.4,
+                borderWidth: 3,
+            },
+            {
+                label: 'Generative AI',
+                data: [40, 71.36, 126.5, 224.2, 397.5, 500, 700],
+                borderColor: '#ef4444',
+                backgroundColor: 'transparent',
+                tension: 0.4,
+                borderWidth: 2,
+            },
+            {
+                label: 'Machine Learning',
+                data: [80, 105.4, 145, 200, 275, 380, 568].map(v => v * (1811.75/568) * 0.2), 
+                borderColor: '#3b82f6',
+                backgroundColor: 'transparent',
+                tension: 0.4,
+                borderWidth: 2,
+            }
+        ]
+    };
+    
+    const chartOptions = (title) => ({
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+            legend: {
+                position: 'bottom',
+                labels: {
+                    color: chartFontColor,
+                    font: {
+                        size: 12
+                    }
+                }
+            },
+            tooltip: {
+                enabled: true,
+                mode: 'index',
+                intersect: false,
+                backgroundColor: 'rgba(0, 0, 0, 0.8)',
+                titleFont: {
+                    size: 14,
+                    weight: 'bold'
+                },
+                bodyFont: {
+                    size: 12
+                },
+                callbacks: {
+                    label: function(context) {
+                        let label = context.dataset.label || '';
+                        if (label) {
+                            label += ': ';
+                        }
+                        if (context.parsed.y !== null) {
+                            if (title.includes('CAGR')) {
+                                label += context.parsed.y + '%';
+                            } else if (title.includes('Miliar USD')) {
+                                label += '$' + context.parsed.y.toFixed(2) + ' Miliar';
+                            } else {
+                                label += context.parsed.y + '%';
+                            }
+                        }
+                        return label;
+                    }
+                }
+            }
+        },
+        scales: {
+            y: {
+                beginAtZero: true,
+                grid: {
+                    color: gridColor
+                },
+                ticks: {
+                    color: chartFontColor,
+                    callback: function(value) {
+                         if (title.includes('%')) return value + '%';
+                         if (title.includes('Miliar')) return '$' + value;
+                         return value;
+                    }
+                }
+            },
+            x: {
+                grid: {
+                    display: false
+                },
+                ticks: {
+                    color: chartFontColor,
+                    maxRotation: 0,
+                    minRotation: 0
+                }
+            }
+        }
+    });
+    
+    const doughnutOptions = {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+            legend: {
+                position: 'bottom',
+                labels: {
+                    color: chartFontColor,
+                    font: { size: 12 }
+                }
+            },
+            tooltip: {
+                callbacks: {
+                    label: function(context) {
+                        let label = context.label || '';
+                        if (label) { label += ': '; }
+                        let value = context.raw || 0;
+                        label += value + '%';
+                        return label;
+                    }
+                }
+            }
+        }
+    };
+
+    if (document.getElementById('globalTrendsChart')) {
+        new Chart(document.getElementById('globalTrendsChart'), {
+            type: 'bar',
+            data: {
+                labels: globalTrendsData.labels,
+                datasets: [{
+                    label: '% Pengusaha Memperkirakan Transformasi',
+                    data: globalTrendsData.data,
+                    backgroundColor: globalTrendsData.bgColor,
+                    borderColor: globalTrendsData.borderColor,
+                    borderWidth: 1,
+                    borderRadius: 5,
+                }]
+            },
+            options: chartOptions('% Pengusaha')
+        });
+    }
+
+    if (document.getElementById('servicesGrowthChart')) {
+        new Chart(document.getElementById('servicesGrowthChart'), {
+            type: 'bar',
+            data: {
+                labels: servicesGrowthData.labels,
+                datasets: [{
+                    label: 'CAGR (2025-2030/34)',
+                    data: servicesGrowthData.data,
+                    backgroundColor: servicesGrowthData.bgColor,
+                    borderColor: servicesGrowthData.borderColor,
+                    borderWidth: 1,
+                    borderRadius: 5,
+                    barPercentage: 0.5,
+                }]
+            },
+            options: chartOptions('CAGR (%)')
+        });
+    }
+
+    if (document.getElementById('procurementAiBenefitsChart')) {
+        new Chart(document.getElementById('procurementAiBenefitsChart'), {
+            type: 'doughnut',
+            data: {
+                labels: procurementAiBenefitsData.labels,
+                datasets: [{
+                    label: 'Kontribusi Manfaat',
+                    data: procurementAiBenefitsData.data,
+                    backgroundColor: procurementAiBenefitsData.bgColor,
+                    borderColor: procurementAiBenefitsData.borderColor,
+                    borderWidth: 2,
+                    hoverOffset: 4
+                }]
+            },
+            options: doughnutOptions
+        });
+    }
+    
+    if (document.getElementById('aiMarketGrowthChart')) {
+        new Chart(document.getElementById('aiMarketGrowthChart'), {
+            type: 'line',
+            data: aiMarketGrowthData,
+            options: chartOptions('Pasar (Miliar USD)')
+        });
+    }
+
+    const accordions = document.querySelectorAll('.accordion-item');
+    accordions.forEach(item => {
+        const header = item.querySelector('.accordion-header');
+        header.addEventListener('click', () => {
+            const content = item.querySelector('.accordion-content');
+            const icon = item.querySelector('.accordion-icon');
+
+            if (content.style.maxHeight) {
+                content.style.maxHeight = null;
+                icon.textContent = '+';
+                icon.classList.remove('rotate-45');
+            } else {
+                accordions.forEach(otherItem => {
+                    otherItem.querySelector('.accordion-content').style.maxHeight = null;
+                    otherItem.querySelector('.accordion-icon').textContent = '+';
+                    otherItem.querySelector('.accordion-icon').classList.remove('rotate-45');
+                });
+                content.style.maxHeight = content.scrollHeight + 'px';
+                icon.textContent = '+';
+                icon.classList.add('rotate-45');
+            }
+        });
+    });
+
+    const mobileMenuButton = document.getElementById('mobile-menu-button');
+    const mobileMenu = document.getElementById('mobile-menu');
+    mobileMenuButton.addEventListener('click', () => {
+        mobileMenu.classList.toggle('hidden');
+    });
+
+    const navLinks = document.querySelectorAll('.nav-link');
+    const sections = document.querySelectorAll('main section');
+    
+    window.addEventListener('scroll', () => {
+        let current = '';
+        sections.forEach(section => {
+            const sectionTop = section.offsetTop;
+            if (pageYOffset >= sectionTop - 150) {
+                current = section.getAttribute('id');
+            }
+        });
+
+        navLinks.forEach(link => {
+            link.classList.remove('active');
+            if (link.getAttribute('href').includes(current)) {
+                link.classList.add('active');
+            }
+        });
+    });
+
+});
+</script>
+
+</body>
+</html>

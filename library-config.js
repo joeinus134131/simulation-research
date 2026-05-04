@@ -114,11 +114,21 @@ const libraryConfig = {
             title: "Lanskap Ekonomi & Kripto 2026",
             category: "economy",
             path: "page/economy/crypto_ex.html",
-            date: "2026-05-03",
+            date: "2025-09-09",
             summary: "Lanskap Ekonomi & Kripto 2026.",
             tags: ["Economy", "Crypto", "Finance"],
             coverImage: "https://s3.tradingview.com/news/image/invezz:c6b6cf277094b-62971483c07f665e369f9732d0042d67-resized.webp",
             podcastUrl: "https://bombfbodieaqdbeipcuz.supabase.co/storage/v1/object/public/podcast/Ekonomi%20&%20Kripto%20Sep.%202025_%20Gejolak%20Global,%20Indonesia%20Tangguh,%20dan%20Transformasi%20Utilitas%20Kripto%20(RWA,%20ReFi,%20ZKP)"
+        },
+        {
+            title: "Prospek Masa Depan Jasa, Pengadaan & AI",
+            category: "economy",
+            path: "page/economy/procure.html",
+            date: "2025-08-23",
+            summary: "Dasbor Interaktif: Prospek Masa Depan Jasa, Pengadaan & AI.",
+            tags: ["Economy", "Data", "Research"],
+            coverImage: "https://www.innovationnewsnetwork.com/wp-content/uploads/2024/02/shutterstockPhonlamai-Photo_1058815598.jpg",
+            podcastUrl: "https://bombfbodieaqdbeipcuz.supabase.co/storage/v1/object/public/podcast/Masa%20Depan%20Jasa%20&%20Pengadaan_%20Terobosan%20AI%202025-2030!.mp3"
         }
     ]
 };
