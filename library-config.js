@@ -129,6 +129,16 @@ const libraryConfig = {
             tags: ["Economy", "Data", "Research"],
             coverImage: "https://www.innovationnewsnetwork.com/wp-content/uploads/2024/02/shutterstockPhonlamai-Photo_1058815598.jpg",
             podcastUrl: "https://bombfbodieaqdbeipcuz.supabase.co/storage/v1/object/public/podcast/Masa%20Depan%20Jasa%20&%20Pengadaan_%20Terobosan%20AI%202025-2030!.mp3"
+        },
+        {
+            title: "Blueprint Bisnis Masa Depan: Langka, Sustainable & High Income",
+            category: "economy",
+            path: "page/economy/economy_province.html",
+            date: "2025-05-05",
+            summary: "Blueprint Bisnis Masa Depan: Langka, Sustainable & High Income.",
+            tags: ["Economy", "Asia Tenggara", "Finance"],
+            coverImage: "https://www.investopedia.com/thmb/D-tg8AGlBOzML-aRcOp8iCwth9s=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/3-20-24cdratesfedannouncement-c5d8817e128c4e849986051853df1529.jpg",
+            podcastUrl: "https://bombfbodieaqdbeipcuz.supabase.co/storage/v1/object/public/podcast/Cuan%20Ekspor%20Bonggol%20Jagung%20Lampung%20Selatan.mp3"
         }
     ]
 };

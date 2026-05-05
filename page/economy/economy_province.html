@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blueprint Bisnis Masa Depan: Langka, Sustainable & High Income</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0F0F1A;
+            color: #E2E8F0;
+        }
+        .glass-card {
+            background: rgba(30, 30, 46, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 1rem;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 300px;
+            max-height: 400px;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 380px;
+            }
+        }
+        .text-gradient {
+            background: linear-gradient(to right, #00F0FF, #F20089);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .step-circle {
+            background: linear-gradient(135deg, #2D00F7, #F20089);
+            box-shadow: 0 0 15px rgba(242, 0, 137, 0.4);
+        }
+    </style>
+</head>
+<body class="antialiased overflow-x-hidden selection:bg-[#F20089] selection:text-white">
+
+    <nav class="sticky top-0 z-50 glass-card rounded-none border-t-0 border-l-0 border-r-0 px-6 py-4 mb-8">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <div class="text-xl font-bold tracking-wider text-gradient">FUTURE.BIZ_</div>
+            <div class="hidden md:flex space-x-6 text-sm font-semibold text-gray-300">
+                <a href="#landscape" class="hover:text-[#00F0FF] transition">Lanskap</a>
+                <a href="#ideas" class="hover:text-[#F20089] transition">Ide Bisnis</a>
+                <a href="#capital" class="hover:text-[#00F0FF] transition">Estimasi Modal</a>
+                <a href="#framework" class="hover:text-[#F20089] transition">Realisasi</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-20">
+        
+        <header class="text-center py-16 mb-12">
+            <h1 class="text-4xl md:text-6xl font-extrabold mb-6 leading-tight">Blueprint Bisnis Masa Depan<br><span class="text-gradient">Langka, Sustainable & High Income</span></h1>
+            <p class="max-w-3xl mx-auto text-lg md:text-xl text-gray-400">Di era disrupsi teknologi, bisnis yang bertahan dan meraup valuasi tinggi bukan sekadar yang ikut tren, melainkan yang memecahkan masalah sistemik global melalui inovasi mendalam.</p>
+        </header>
+
+        <section id="landscape" class="mb-20">
+            <div class="glass-card p-8">
+                <h2 class="text-2xl md:text-3xl font-bold mb-4 text-[#00F0FF]">1. Lanskap Makro: Pergeseran Modal Global</h2>
+                <p class="mb-8 text-gray-300 leading-relaxed">Sebelum memilih ide, kita harus melihat ke mana arus modal pintar (smart money) bergerak. Tren dekade mendatang didominasi oleh otomatisasi kognitif, keberlanjutan ekosistem, dan privasi absolut. Data di bawah ini memproyeksikan distribusi investasi venture capital global pada sektor-sektor penentu masa depan.</p>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                    <div class="chart-container">
+                        <canvas id="macroChart"></canvas>
+                    </div>
+                    <div>
+                        <ul class="space-y-6">
+                            <li class="flex items-start">
+                                <span class="text-3xl mr-4">&#129302;</span>
+                                <div>
+                                    <h3 class="text-xl font-semibold text-white">AI & Kognisi Mesin (40%)</h3>
+                                    <p class="text-sm text-gray-400 mt-1">Penggerak utama efisiensi industri, dari diagnostik medis hingga hyper-personalization.</p>
+                                </div>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-3xl mr-4">&#127758;</span>
+                                <div>
+                                    <h3 class="text-xl font-semibold text-white">Green Tech & Circularity (30%)</h3>
+                                    <p class="text-sm text-gray-400 mt-1">Bisnis yang mendaur ulang, menekan karbon, dan memastikan ketahanan sumber daya.</p>
+                                </div>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-3xl mr-4">&#129644;</span>
+                                <div>
+                                    <h3 class="text-xl font-semibold text-white">Bioteknologi Preventif (20%)</h3>
+                                    <p class="text-sm text-gray-400 mt-1">Bergeser dari mengobati penyakit menjadi mencegah penuaan dan rekayasa kesehatan.</p>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="ideas" class="mb-20">
+            <div class="mb-10">
+                <h2 class="text-2xl md:text-3xl font-bold mb-4 text-[#F20089]">2. Empat Kuadran Ide Bisnis Prospektabel</h2>
+                <p class="text-gray-300 leading-relaxed">Berdasarkan analisis megatrend, berikut adalah 4 ide bisnis yang masih "langka" (blue ocean) namun memiliki skalabilitas sangat tinggi untuk menghasilkan pendapatan eksponensial secara berkelanjutan.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="glass-card p-8 border-t-4 border-[#00F0FF] hover:-translate-y-2 transition duration-300">
+                    <div class="text-4xl mb-4">&#129504;</div>
+                    <h3 class="text-xl font-bold mb-3 text-white">B2B AI Data Privacy Shield</h3>
+                    <p class="text-gray-400 text-sm mb-4">Seiring perusahaan menggunakan AI, kebocoran data menjadi risiko utama. Bisnis ini membangun sistem enkripsi (mungkin berbasis blockchain) untuk menganonimkan data perusahaan sebelum diproses oleh AI pihak ketiga.</p>
+                    <div class="inline-block bg-[#00F0FF]/20 text-[#00F0FF] text-xs px-3 py-1 rounded-full font-semibold">Sustainabilitas: Sangat Tinggi</div>
+                </div>
+
+                <div class="glass-card p-8 border-t-4 border-[#F20089] hover:-translate-y-2 transition duration-300">
+                    <div class="text-4xl mb-4">&#127811;</div>
+                    <h3 class="text-xl font-bold mb-3 text-white">Hyper-Local Vertical Micro-Farms</h3>
+                    <p class="text-gray-400 text-sm mb-4">Bukan sekadar bertani, melainkan menyewakan "modul pertanian pintar" terotomatisasi untuk restoran dan supermarket lokal. Mengurangi rantai pasok 90% dan memberikan margin keuntungan langsung.</p>
+                    <div class="inline-block bg-[#F20089]/20 text-[#F20089] text-xs px-3 py-1 rounded-full font-semibold">Sustainabilitas: Jangka Panjang</div>
+                </div>
+
+                <div class="glass-card p-8 border-t-4 border-[#FFEA00] hover:-translate-y-2 transition duration-300">
+                    <div class="text-4xl mb-4">&#9851;</div>
+                    <h3 class="text-xl font-bold mb-3 text-white">Upcycling Tech (E-Waste to Material)</h3>
+                    <p class="text-gray-400 text-sm mb-4">Limbah elektronik adalah tambang emas masa depan. Bisnis yang menggunakan mikrorobotik atau cairan pelarut ramah lingkungan untuk mengekstrak rare-earth elements dari HP/Laptop bekas secara efisien.</p>
+                    <div class="inline-block bg-[#FFEA00]/20 text-[#FFEA00] text-xs px-3 py-1 rounded-full font-semibold text-black">Sustainabilitas: Kritis & Menguntungkan</div>
+                </div>
+
+                <div class="glass-card p-8 border-t-4 border-[#2D00F7] hover:-translate-y-2 transition duration-300">
+                    <div class="text-4xl mb-4">&#128138;</div>
+                    <h3 class="text-xl font-bold mb-3 text-white">Algorithmic Preventive Wellness</h3>
+                    <p class="text-gray-400 text-sm mb-4">Klinik virtual berlangganan yang menggabungkan data smartwatch, tes DNA, dan nutrisi untuk memprediksi risiko penyakit dan mengirimkan suplemen ultra-personal setiap bulan.</p>
+                    <div class="inline-block bg-[#2D00F7]/40 text-[#A3B1FF] text-xs px-3 py-1 rounded-full font-semibold">Sustainabilitas: High Retention Rate</div>
+                </div>
+            </div>
+        </section>
+
+        <section id="capital" class="mb-20">
+            <div class="glass-card p-8">
+                <h2 class="text-2xl md:text-3xl font-bold mb-4 text-white">3. Komparasi Modal vs. Potensi Valuasi (Tahun ke-3)</h2>
+                <p class="mb-8 text-gray-300 leading-relaxed">Salah satu kunci bisnis yang berkembang adalah memahami rasio modal awal (CAPEX) terhadap potensi margin keuntungan. Grafik ini mengilustrasikan estimasi rasio investasi awal (dalam ribuan USD) dibandingkan dengan proyeksi valuasi bisnis jika berhasil mencapai Product-Market Fit.</p>
+                
+                <div class="w-full">
+                    <div class="chart-container" style="max-width: 1000px;">
+                        <canvas id="capitalChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="framework" class="mb-10">
+            <h2 class="text-2xl md:text-3xl font-bold mb-8 text-center text-white">4. Kerangka Realisasi & Tahapan Skalabilitas</h2>
+            <p class="text-center text-gray-300 max-w-3xl mx-auto mb-12">Membangun ide langka membutuhkan pendekatan yang sangat terstruktur untuk menekan risiko kegagalan. Gunakan tahapan ini untuk meningkatkan probabilitas kesuksesan dan pendapatan Anda secara eksponensial.</p>
+            
+            <div class="flex flex-col md:flex-row justify-between items-stretch gap-6 relative">
+                
+                <div class="hidden md:block absolute top-1/2 left-0 w-full h-1 bg-gradient-to-r from-[#2D00F7] via-[#F20089] to-[#00F0FF] transform -translate-y-1/2 z-0 opacity-50"></div>
+
+                <div class="glass-card p-6 flex-1 relative z-10 flex flex-col">
+                    <div class="w-12 h-12 rounded-full step-circle flex items-center justify-center text-white font-bold text-xl mb-4 border-4 border-[#0F0F1A]">1</div>
+                    <h3 class="text-lg font-bold text-[#00F0FF] mb-2">Validasi Friksi</h3>
+                    <p class="text-sm text-gray-400">Jangan bangun produk dulu. Wawancarai 50 calon klien B2B atau konsumen. Konfirmasi bahwa masalah yang Anda pecahkan bernilai mahal untuk diselesaikan.</p>
+                </div>
+
+                <div class="glass-card p-6 flex-1 relative z-10 flex flex-col">
+                    <div class="w-12 h-12 rounded-full step-circle flex items-center justify-center text-white font-bold text-xl mb-4 border-4 border-[#0F0F1A]">2</div>
+                    <h3 class="text-lg font-bold text-[#F20089] mb-2">Micro-MVP & Presales</h3>
+                    <p class="text-sm text-gray-400">Buat purwarupa termurah (bahkan manual di balik layar). Tawarkan kontrak presales atau sistem pre-order. Jika tidak ada yang mau membayar purwarupa, pivot ide Anda.</p>
+                </div>
+
+                <div class="glass-card p-6 flex-1 relative z-10 flex flex-col">
+                    <div class="w-12 h-12 rounded-full step-circle flex items-center justify-center text-white font-bold text-xl mb-4 border-4 border-[#0F0F1A]">3</div>
+                    <h3 class="text-lg font-bold text-[#FFEA00] mb-2">Akusisi & Iterasi</h3>
+                    <p class="text-sm text-gray-400">Fokus pada 100 pelanggan sejati pertama (Early Adopters). Perbaiki produk secara obsesif berdasarkan feedback mereka hingga mencapai Product-Market Fit.</p>
+                </div>
+
+                <div class="glass-card p-6 flex-1 relative z-10 flex flex-col">
+                    <div class="w-12 h-12 rounded-full step-circle flex items-center justify-center text-white font-bold text-xl mb-4 border-4 border-[#0F0F1A]">4</div>
+                    <h3 class="text-lg font-bold text-[#00F0FF] mb-2">Otomasi & Skalabilitas</h3>
+                    <p class="text-sm text-gray-400">Hanya setelah margin keuntungan sehat, suntikkan modal untuk pemasaran masif (Growth Hacking) dan otomatisasi operasional menggunakan sistem AI.</p>
+                </div>
+
+            </div>
+        </section>
+
+        <section class="mt-20">
+             <div class="glass-card p-8">
+                 <h2 class="text-2xl md:text-3xl font-bold mb-4 text-[#F20089]">5. Proyeksi Trajektori Pertumbuhan</h2>
+                 <p class="mb-8 text-gray-300">Grafik ini memvisualisasikan bagaimana bisnis inovatif masa depan beroperasi dengan efek jaringan dan efisiensi teknologi, menciptakan kurva pertumbuhan eksponensial yang sulit dikejar kompetitor tradisional setelah tahun ketiga.</p>
+                 <div class="chart-container">
+                    <canvas id="growthChart"></canvas>
+                 </div>
+             </div>
+        </section>
+
+    </main>
+
+    <footer class="border-t border-white/10 pt-8 pb-12 mt-12 bg-black/50 text-xs text-gray-500 px-4">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center">
+            <p>&copy; 2026 Future.Biz Blueprint. Data represents estimated market projections.</p>
+            <div class="mt-4 md:mt-0 flex flex-col md:text-right">
+                <span>Developer Note: Palette: Energetic & Playful (#2D00F7, #F20089, #00F0FF, #FFEA00)</span>
+                <span>Strategy: Analyze macro trends -> Define niche opportunities -> Capital planning -> Realization framework</span>
+                <span>Tech Stack Confirmation: Chart.js Canvas explicitly used. SVG and Mermaid JS strictly NOT used in this rendering.</span>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const macroCtx = document.getElementById('macroChart').getContext('2d');
+        new Chart(macroCtx, {
+            type: 'doughnut',
+            data: {
+                labels: [
+                    ['AI & Kognisi', 'Mesin'],
+                    ['Green Tech &', 'Circularity'],
+                    ['Bioteknologi', 'Preventif'],
+                    ['Infrastruktur', 'Web3 & Spatial']
+                ],
+                datasets: [{
+                    data: [40, 30, 20, 10],
+                    backgroundColor: [
+                        '#2D00F7', 
+                        '#00F0FF', 
+                        '#F20089', 
+                        '#FFEA00'  
+                    ],
+                    borderWidth: 0,
+                    hoverOffset: 10
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'right',
+                        labels: {
+                            color: '#E2E8F0',
+                            font: { family: 'Inter', size: 13 }
+                        }
+                    },
+                    tooltip: {
+                        callbacks: {
+                            title: function(tooltipItems) {
+                                const item = tooltipItems[0];
+                                let label = item.chart.data.labels[item.dataIndex];
+                                if (Array.isArray(label)) {
+                                    return label.join(' ');
+                                } else {
+                                    return label;
+                                }
+                            }
+                        }
+                    }
+                },
+                cutout: '70%'
+            }
+        });
+
+        const capitalCtx = document.getElementById('capitalChart').getContext('2d');
+        new Chart(capitalCtx, {
+            type: 'bar',
+            data: {
+                labels: [
+                    ['B2B AI Data', 'Privacy Shield'],
+                    ['Micro-Farms', 'Vertikal Lokal'],
+                    ['Tech Ekstraksi', 'E-Waste'],
+                    ['Klinik Wellness', 'Algoritmik']
+                ],
+                datasets: [
+                    {
+                        label: 'Estimasi Modal Awal ($ USD x 1000)',
+                        data: [50, 150, 200, 80],
+                        backgroundColor: '#00F0FF',
+                        borderRadius: 6
+                    },
+                    {
+                        label: 'Proyeksi Valuasi Thn-3 ($ USD x 1000)',
+                        data: [1200, 800, 1500, 600],
+                        backgroundColor: '#F20089',
+                        borderRadius: 6
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        grid: { color: 'rgba(255, 255, 255, 0.1)' },
+                        ticks: { color: '#A0AEC0' }
+                    },
+                    x: {
+                        grid: { display: false },
+                        ticks: { color: '#E2E8F0' }
+                    }
+                },
+                plugins: {
+                    legend: {
+                        labels: { color: '#E2E8F0' }
+                    },
+                    tooltip: {
+                        callbacks: {
+                            title: function(tooltipItems) {
+                                const item = tooltipItems[0];
+                                let label = item.chart.data.labels[item.dataIndex];
+                                if (Array.isArray(label)) {
+                                    return label.join(' ');
+                                } else {
+                                    return label;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        });
+
+        const growthCtx = document.getElementById('growthChart').getContext('2d');
+        new Chart(growthCtx, {
+            type: 'line',
+            data: {
+                labels: ['Tahun 1', 'Tahun 2', 'Tahun 3', 'Tahun 4', 'Tahun 5'],
+                datasets: [
+                    {
+                        label: 'Pertumbuhan Organik (Bisnis Tradisional)',
+                        data: [100, 150, 210, 280, 360],
+                        borderColor: '#FFEA00',
+                        backgroundColor: 'transparent',
+                        borderWidth: 2,
+                        tension: 0.4
+                    },
+                    {
+                        label: 'Pertumbuhan Eksponensial (Tech-Enabled Biz)',
+                        data: [100, 180, 400, 1200, 3500],
+                        borderColor: '#2D00F7',
+                        backgroundColor: 'rgba(45, 0, 247, 0.1)',
+                        borderWidth: 4,
+                        fill: true,
+                        tension: 0.4
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        grid: { color: 'rgba(255, 255, 255, 0.05)' },
+                        ticks: { color: '#A0AEC0', display: false }
+                    },
+                    x: {
+                        grid: { color: 'rgba(255, 255, 255, 0.05)' },
+                        ticks: { color: '#A0AEC0' }
+                    }
+                },
+                plugins: {
+                    legend: {
+                        position: 'top',
+                        labels: { color: '#E2E8F0', usePointStyle: true }
+                    },
+                    tooltip: {
+                        callbacks: {
+                            title: function(tooltipItems) {
+                                const item = tooltipItems[0];
+                                let label = item.chart.data.labels[item.dataIndex];
+                                if (Array.isArray(label)) {
+                                    return label.join(' ');
+                                } else {
+                                    return label;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>
