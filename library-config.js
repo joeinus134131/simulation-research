@@ -139,6 +139,16 @@ const libraryConfig = {
             tags: ["Economy", "Asia Tenggara", "Finance"],
             coverImage: "https://www.investopedia.com/thmb/D-tg8AGlBOzML-aRcOp8iCwth9s=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/3-20-24cdratesfedannouncement-c5d8817e128c4e849986051853df1529.jpg",
             podcastUrl: "https://bombfbodieaqdbeipcuz.supabase.co/storage/v1/object/public/podcast/Cuan%20Ekspor%20Bonggol%20Jagung%20Lampung%20Selatan.mp3"
+        },
+        {
+            title: "Membongkar Dunia Kripto & Blockchain",
+            category: "tech",
+            path: "page/tech/blockchain.html",
+            date: "2025-05-05",
+            summary: "Blueprint Bisnis Masa Depan: Langka, Sustainable & High Income.",
+            tags: ["Economy", "Asia Tenggara", "Finance"],
+            coverImage: "https://evc.sa/wp-content/uploads/2023/05/Blockchain-1-1024x614.webp",
+            podcastUrl: "https://bombfbodieaqdbeipcuz.supabase.co/storage/v1/object/public/podcast/Decoding%20the%20Crypto%20Revolution_%20Blockchain,%20Bitcoin,%20and%20Beyond.mp3"
         }
     ]
 };

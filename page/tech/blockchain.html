@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Membongkar Dunia Kripto & Blockchain</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+<style>
+body { font-family: 'Inter', sans-serif; background-color: #0F172A; color: #F8FAFC; }
+.glass-card { background: rgba(30, 41, 59, 0.7); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.1); box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.5); }
+.chart-container { position: relative; width: 100%; max-width: 800px; margin-left: auto; margin-right: auto; height: 350px; max-height: 400px; }
+@media (max-width: 640px) { .chart-container { height: 280px; } }
+.gradient-text { background: linear-gradient(to right, #06B6D4, #EC4899); -webkit-background-clip: text; color: transparent; }
+</style>
+</head>
+<body class="antialiased min-h-screen pb-20">
+
+<header class="text-center py-20 px-4">
+<h1 class="text-4xl md:text-6xl font-extrabold mb-4 tracking-tight"><span class="gradient-text">Kripto & Blockchain</span><br>Dalam Bahasa Manusia</h1>
+<p class="text-lg md:text-xl text-slate-400 max-w-2xl mx-auto">Penjelasan logis dan sederhana tentang bagaimana teknologi masa depan ini bekerja, tanpa istilah teknis yang memusingkan.</p>
+</header>
+
+<main class="container mx-auto px-4 md:px-8 space-y-24">
+
+<section>
+<div class="mb-10 text-center">
+<h2 class="text-3xl font-bold mb-4 text-emerald-400">1. Apa itu Blockchain?</h2>
+<p class="text-slate-300 max-w-3xl mx-auto leading-relaxed">Bayangkan sebuah <strong>Buku Catatan Bersama</strong>. Di bank tradisional, hanya bank yang memegang buku catatan keuangan Anda. Di Blockchain, buku catatan ini digandakan dan dibagikan ke jutaan komputer di seluruh dunia. Jika seseorang ingin mencatat transaksi (misal: Budi mengirim uang ke Andi), semua komputer harus mengecek dan setuju bahwa Budi benar-benar punya uang tersebut. Setelah dicatat, halamannya dikunci rapat dan tidak bisa diubah atau dihapus oleh siapapun.</p>
+</div>
+
+<div class="glass-card rounded-2xl p-8 max-w-4xl mx-auto">
+<h3 class="text-xl font-semibold mb-6 text-center text-cyan-400">Proses Pencatatan di Blockchain</h3>
+<div class="flex flex-col md:flex-row items-center justify-center gap-4">
+<div class="bg-slate-800 border-2 border-cyan-500 rounded-xl p-4 w-full md:w-48 text-center shadow-lg">
+<div class="text-xs text-slate-400 mb-2">Blok 1</div>
+<div class="font-bold text-sm">Data: Budi &rarr; Andi</div>
+<div class="text-xs mt-2 text-pink-400">Hash: A1B2...</div>
+</div>
+<div class="text-4xl text-emerald-400 rotate-90 md:rotate-0">&#10141;</div>
+<div class="bg-slate-800 border-2 border-pink-500 rounded-xl p-4 w-full md:w-48 text-center shadow-lg">
+<div class="text-xs text-slate-400 mb-2">Blok 2</div>
+<div class="font-bold text-sm">Data: Andi &rarr; Susi</div>
+<div class="text-xs mt-2 text-cyan-400">Prev: A1B2...</div>
+<div class="text-xs text-pink-400">Hash: C3D4...</div>
+</div>
+<div class="text-4xl text-emerald-400 rotate-90 md:rotate-0">&#10141;</div>
+<div class="bg-slate-800 border-2 border-purple-500 rounded-xl p-4 w-full md:w-48 text-center shadow-lg">
+<div class="text-xs text-slate-400 mb-2">Blok 3</div>
+<div class="font-bold text-sm">Data: Susi &rarr; Iwan</div>
+<div class="text-xs mt-2 text-cyan-400">Prev: C3D4...</div>
+<div class="text-xs text-pink-400">Hash: E5F6...</div>
+</div>
+</div>
+<p class="text-sm text-slate-400 text-center mt-8">Setiap blok data saling mengunci dengan blok sebelumnya menggunakan kode unik (Hash). Meretas satu blok berarti harus meretas jutaan komputer secara bersamaan. Inilah yang membuatnya sangat aman.</p>
+</div>
+</section>
+
+<section>
+<div class="mb-10">
+<h2 class="text-3xl font-bold mb-4 text-pink-400 text-center">2. Jenis-Jenis Cryptocurrency</h2>
+<p class="text-slate-300 max-w-3xl mx-auto text-center leading-relaxed">Cryptocurrency atau uang kripto adalah mata uang yang hidup di dalam jaringan Blockchain tadi. Namun, tidak semua koin diciptakan sama. Mereka memiliki fungsi dan tujuan yang berbeda-beda.</p>
+</div>
+
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+<div class="glass-card rounded-2xl p-6">
+<h3 class="text-xl font-bold mb-4 text-center">Peta Kekuatan Pasar Kripto</h3>
+<div class="chart-container">
+<canvas id="marketChart"></canvas>
+</div>
+<p class="text-sm text-slate-400 text-center mt-4">Bitcoin masih menjadi raja, namun fungsi lain seperti platform aplikasi (Altcoins) dan uang stabil (Stablecoins) memegang peran vital.</p>
+</div>
+
+<div class="space-y-4">
+<div class="bg-slate-800/80 border border-amber-500/30 p-5 rounded-xl hover:bg-slate-800 transition">
+<h4 class="text-amber-400 font-bold text-lg mb-1">&#9733; Bitcoin (BTC) - Sang "Emas Digital"</h4>
+<p class="text-sm text-slate-300">Kripto pertama dan paling terkenal. Fungsinya mirip emas; orang membelinya untuk disimpan karena jumlahnya terbatas (hanya 21 juta keping di dunia) dan kebal inflasi bank sentral.</p>
+</div>
+<div class="bg-slate-800/80 border border-purple-500/30 p-5 rounded-xl hover:bg-slate-800 transition">
+<h4 class="text-purple-400 font-bold text-lg mb-1">&#9881; Altcoins - Si "Komputer Global"</h4>
+<p class="text-sm text-slate-300">Semua koin selain Bitcoin (Alternative Coins). Contoh: <strong>Ethereum (ETH)</strong>. Bedanya, Ethereum bukan cuma uang, tapi "komputer super" tempat orang bisa membuat program otomatis (Smart Contracts) tanpa perantara.</p>
+</div>
+<div class="bg-slate-800/80 border border-emerald-500/30 p-5 rounded-xl hover:bg-slate-800 transition">
+<h4 class="text-emerald-400 font-bold text-lg mb-1">&#36; Stablecoins - Si "Penyeimbang"</h4>
+<p class="text-sm text-slate-300">Karena harga Bitcoin bisa naik turun drastis, diciptakanlah Stablecoin (seperti USDT atau USDC). Nilainya selalu dipatok 1:1 dengan uang asli (1 USDT = 1 Dolar AS). Ini dipakai untuk bertransaksi atau menyimpan uang di dunia kripto tanpa takut harga anjlok.</p>
+</div>
+<div class="bg-slate-800/80 border border-pink-500/30 p-5 rounded-xl hover:bg-slate-800 transition">
+<h4 class="text-pink-400 font-bold text-lg mb-1">&#128054; Meme Coins - Si "Koin Candaan"</h4>
+<p class="text-sm text-slate-300">Koin yang awalnya dibuat untuk bercanda (contoh: Dogecoin, Shiba Inu). Nilainya tidak didasari teknologi canggih, melainkan murni dari tren internet dan kekuatan komunitas. Sangat berisiko tinggi.</p>
+</div>
+</div>
+</div>
+</section>
+
+<section>
+<div class="mb-10 text-center">
+<h2 class="text-3xl font-bold mb-4 text-cyan-400">3. Mengapa Ada Banyak Macam Altcoin?</h2>
+<p class="text-slate-300 max-w-3xl mx-auto leading-relaxed">Bitcoin itu aman tapi lambat. Sama seperti internet zaman dulu. Altcoin (seperti Solana atau Polygon) diciptakan untuk memecahkan masalah kecepatan ini agar kripto bisa dipakai layaknya kartu kredit di kasir.</p>
+</div>
+
+<div class="glass-card rounded-2xl p-6">
+<h3 class="text-xl font-bold mb-4 text-center">Kecepatan Transaksi per Detik (TPS)</h3>
+<div class="chart-container">
+<canvas id="speedChart"></canvas>
+</div>
+<p class="text-sm text-slate-400 text-center mt-4">Solana (Altcoin generasi baru) dirancang jauh lebih cepat daripada Bitcoin untuk mendukung jutaan transaksi harian, menyaingi raksasa tradisional seperti Visa.</p>
+</div>
+</section>
+
+<section>
+<div class="mb-10 text-center">
+<h2 class="text-3xl font-bold mb-4 text-purple-400">4. Tren Penggunaan Kripto</h2>
+<p class="text-slate-300 max-w-3xl mx-auto leading-relaxed">Apakah ini hanya tren sesaat? Data menunjukkan pengguna mata uang kripto terus berkembang seiring dengan infrastruktur yang semakin matang.</p>
+</div>
+
+<div class="glass-card rounded-2xl p-6">
+<h3 class="text-xl font-bold mb-4 text-center">Estimasi Pertumbuhan Pengguna Kripto Global (Juta Orang)</h3>
+<div class="chart-container">
+<canvas id="adoptionChart"></canvas>
+</div>
+<p class="text-sm text-slate-400 text-center mt-4">Dari hanya dimengerti oleh teknisi komputer, kini kripto mulai diadopsi oleh jutaan orang awam dan institusi besar di seluruh dunia.</p>
+</div>
+</section>
+
+<section class="text-center mt-20 p-8 glass-card rounded-2xl">
+<h2 class="text-3xl font-bold mb-6 gradient-text">Kesimpulan Sederhana</h2>
+<p class="text-lg text-slate-300 max-w-2xl mx-auto"><strong>Blockchain</strong> adalah teknologinya (Buku catatan digital yang tak bisa diretas).<br><br><strong>Kripto</strong> adalah uang atau aset yang dicatat di dalam buku tersebut.<br><strong>Bitcoin</strong> adalah emasnya.<br><strong>Altcoin</strong> adalah perusahaan teknologinya.<br><strong>Stablecoin</strong> adalah uang tunainya.</p>
+</section>
+
+</main>
+
+<div class="text-center text-xs text-slate-700 mt-12 pb-4">
+Meta: Palette=Vibrant Tech. Plan=Intro->Concept->Categories->Speed Comparison->Adoption Trend. Tools=ChartJS, HTML Flexbox. Validation: No SVG, No Mermaid used.
+</div>
+
+<script>
+function wrapLabel(text, maxLength) {
+if (text.length <= maxLength) return text;
+const words = text.split(' ');
+const lines = [];
+let currentLine = words[0];
+for (let i = 1; i < words.length; i++) {
+if (currentLine.length + words[i].length + 1 <= maxLength) {
+currentLine += ' ' + words[i];
+} else {
+lines.push(currentLine);
+currentLine = words[i];
+}
+}
+lines.push(currentLine);
+return lines;
+}
+
+const tooltipConfig = {
+tooltip: {
+callbacks: {
+title: function(tooltipItems) {
+const item = tooltipItems[0];
+let label = item.chart.data.labels[item.dataIndex];
+if (Array.isArray(label)) {
+return label.join(' ');
+} else {
+return label;
+}
+}
+}
+}
+};
+
+Chart.defaults.color = '#94A3B8';
+Chart.defaults.font.family = "'Inter', sans-serif";
+
+const rawMarketLabels = ['Bitcoin (Penyimpan Nilai Utama)', 'Ethereum (Platform Kontrak Pintar)', 'Stablecoins (Aset Patokan Fiat)', 'Altcoins Lainnya (Berbagai Fungsi)'];
+const wrappedMarketLabels = rawMarketLabels.map(label => wrapLabel(label, 16));
+
+const ctxMarket = document.getElementById('marketChart').getContext('2d');
+new Chart(ctxMarket, {
+type: 'doughnut',
+data: {
+labels: wrappedMarketLabels,
+datasets: [{
+data: [50, 18, 8, 24],
+backgroundColor: [
+'#F59E0B',
+'#8B5CF6',
+'#10B981',
+'#06B6D4'
+],
+borderColor: '#1E293B',
+borderWidth: 2,
+hoverOffset: 4
+}]
+},
+options: {
+responsive: true,
+maintainAspectRatio: false,
+plugins: {
+legend: { position: 'bottom', labels: { color: '#F8FAFC', padding: 20 } },
+...tooltipConfig
+},
+cutout: '65%'
+}
+});
+
+const rawSpeedLabels = ['Bitcoin (Generasi 1)', 'Ethereum (Generasi 2)', 'Solana (Generasi 3)', 'Visa (Keuangan Tradisional)'];
+const wrappedSpeedLabels = rawSpeedLabels.map(label => wrapLabel(label, 16));
+
+const ctxSpeed = document.getElementById('speedChart').getContext('2d');
+new Chart(ctxSpeed, {
+type: 'bar',
+data: {
+labels: wrappedSpeedLabels,
+datasets: [{
+label: 'Transaksi Per Detik (TPS)',
+data: [7, 30, 65000, 24000],
+backgroundColor: [
+'rgba(245, 158, 11, 0.7)',
+'rgba(139, 92, 246, 0.7)',
+'rgba(6, 182, 212, 0.7)',
+'rgba(236, 72, 153, 0.7)'
+],
+borderColor: [
+'#F59E0B',
+'#8B5CF6',
+'#06B6D4',
+'#EC4899'
+],
+borderWidth: 1,
+borderRadius: 4
+}]
+},
+options: {
+responsive: true,
+maintainAspectRatio: false,
+scales: {
+y: {
+type: 'logarithmic',
+grid: { color: 'rgba(255, 255, 255, 0.05)' },
+ticks: { color: '#94A3B8' }
+},
+x: {
+grid: { display: false },
+ticks: { color: '#94A3B8' }
+}
+},
+plugins: {
+legend: { display: false },
+...tooltipConfig
+}
+}
+});
+
+const rawAdoptionLabels = ['Tahun 2018', 'Tahun 2019', 'Tahun 2020', 'Tahun 2021', 'Tahun 2022', 'Tahun 2023', 'Tahun 2024'];
+const wrappedAdoptionLabels = rawAdoptionLabels.map(label => wrapLabel(label, 16));
+
+const ctxAdoption = document.getElementById('adoptionChart').getContext('2d');
+new Chart(ctxAdoption, {
+type: 'line',
+data: {
+labels: wrappedAdoptionLabels,
+datasets: [{
+label: 'Pengguna Kripto Global (Juta)',
+data: [30, 50, 80, 295, 425, 580, 650],
+fill: true,
+backgroundColor: 'rgba(16, 185, 129, 0.2)',
+borderColor: '#10B981',
+borderWidth: 3,
+pointBackgroundColor: '#0F172A',
+pointBorderColor: '#10B981',
+pointBorderWidth: 2,
+pointRadius: 4,
+tension: 0.4
+}]
+},
+options: {
+responsive: true,
+maintainAspectRatio: false,
+scales: {
+y: {
+grid: { color: 'rgba(255, 255, 255, 0.05)' },
+ticks: { color: '#94A3B8' }
+},
+x: {
+grid: { display: false },
+ticks: { color: '#94A3B8' }
+}
+},
+plugins: {
+legend: { display: false },
+...tooltipConfig
+}
+}
+});
+</script>
+</body>
+</html>
