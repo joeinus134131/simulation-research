@@ -146,9 +146,19 @@ const libraryConfig = {
             path: "page/tech/blockchain.html",
             date: "2025-05-05",
             summary: "Blueprint Bisnis Masa Depan: Langka, Sustainable & High Income.",
-            tags: ["Economy", "Asia Tenggara", "Finance"],
+            tags: ["Blockchain", "Asia Tenggara", "Tech"],
             coverImage: "https://evc.sa/wp-content/uploads/2023/05/Blockchain-1-1024x614.webp",
             podcastUrl: "https://bombfbodieaqdbeipcuz.supabase.co/storage/v1/object/public/podcast/Decoding%20the%20Crypto%20Revolution_%20Blockchain,%20Bitcoin,%20and%20Beyond.mp3"
+        },
+        {
+            title: "Lanskap Frontier AI: Perkembangan & Dampak Global",
+            category: "tech",
+            path: "page/tech/ai_frontier.html",
+            date: "2025-05-09",
+            summary: "Ai Transformation in frontier",
+            tags: ["Tech", "Global", "Artificial Intelligence"],
+            coverImage: "https://trilateralresearch.com/wp-content/uploads/2023/11/Frontier-AI-heading-safely-into-new-territory.jpg",
+            podcastUrl: "https://bombfbodieaqdbeipcuz.supabase.co/storage/v1/object/public/podcast/Saat%20AI%20Bukan%20Lagi%20Sekadar%20Chatbot.mp3"
         }
     ]
 };

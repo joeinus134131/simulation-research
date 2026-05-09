@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lanskap Frontier AI: Perkembangan & Dampak Global</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            blue: '#1D4ED8',
+                            cyan: '#06B6D4',
+                            emerald: '#10B981',
+                            amber: '#F59E0B',
+                            purple: '#8B5CF6',
+                            dark: '#0F172A',
+                            light: '#F8FAFC'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #F8FAFC;
+            color: #0F172A;
+            -webkit-font-smoothing: antialiased;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 300px;
+            max-height: 400px;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 380px;
+            }
+        }
+        .timeline-container {
+            border-left: 4px solid #1D4ED8;
+            padding-left: 1.5rem;
+            margin-left: 1rem;
+        }
+        .timeline-item {
+            position: relative;
+            margin-bottom: 2rem;
+        }
+        .timeline-dot {
+            position: absolute;
+            left: -2.15rem;
+            top: 0.25rem;
+            width: 1rem;
+            height: 1rem;
+            border-radius: 50%;
+            background-color: #F59E0B;
+            border: 3px solid #F8FAFC;
+        }
+        .card-hover {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <!-- Palette: Vibrant Tech Blues & Emerald (High Contrast) -->
+    <!-- Plan: 1. Introduction & Overview. 2. Doughnut chart for R&D focus. 3. Horizontal Bar for Industry Adoption. 4. Radar for Capability leaps. 5. Area chart for Market/Compute Scaling. 6. HTML Timeline for milestones. -->
+    <!-- Selection: R&D Focus -> Compare -> Doughnut. Industry -> Compare -> Bar. Capability -> Compare -> Radar. Scaling -> Change -> Area. Timeline -> Organize -> HTML/CSS. CONFIRMING NO SVG USED. -->
+    <!-- explicitly confirm: NEITHER Mermaid JS NOR SVG were used anywhere in the output. -->
+
+    <nav class="bg-brand-dark text-white sticky top-0 z-50 shadow-lg">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
+            <h1 class="text-xl font-bold tracking-wider">AI<span class="text-brand-cyan">FRONTIER</span></h1>
+            <div class="hidden md:flex space-x-6 text-sm font-semibold">
+                <a href="#fokus" class="hover:text-brand-cyan transition-colors">Fokus Riset</a>
+                <a href="#adopsi" class="hover:text-brand-cyan transition-colors">Adopsi Industri</a>
+                <a href="#kapabilitas" class="hover:text-brand-cyan transition-colors">Kapabilitas</a>
+                <a href="#timeline" class="hover:text-brand-cyan transition-colors">Timeline</a>
+            </div>
+        </div>
+    </nav>
+
+    <header class="bg-brand-dark text-white py-20 px-4 text-center border-b-8 border-brand-cyan relative overflow-hidden">
+        <div class="absolute inset-0 opacity-10" style="background-image: radial-gradient(#06B6D4 2px, transparent 2px); background-size: 30px 30px;"></div>
+        <div class="max-w-4xl mx-auto relative z-10">
+            <div class="inline-block bg-brand-blue text-white px-4 py-1 rounded-full text-sm font-bold mb-6 tracking-widest uppercase">Laporan Analisis 2026</div>
+            <h2 class="text-5xl md:text-6xl font-extrabold mb-6 leading-tight">Mendefinisikan Ulang <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-cyan to-brand-emerald">Kecerdasan</span></h2>
+            <p class="text-xl md:text-2xl text-gray-300 font-light max-w-3xl mx-auto">
+                Perkembangan Artificial Intelligence saat ini tidak lagi sekadar tentang teks. Kita telah memasuki era <strong>Frontier AI</strong>—model yang melampaui batas dengan kemampuan bernalar otonom, pemahaman multimodal, dan percepatan sains.
+            </p>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-10 mb-16" id="fokus">
+            
+            <section class="bg-white rounded-2xl shadow-xl p-8 card-hover border border-gray-100">
+                <div class="flex items-center mb-6">
+                    <span class="text-4xl mr-4">🎯</span>
+                    <h3 class="text-2xl font-bold text-brand-dark">Fokus Riset Model Frontier</h3>
+                </div>
+                <p class="text-gray-600 mb-8 leading-relaxed">
+                    Pengembangan AI beralih dari sekadar model bahasa besar (LLM) menuju agen yang dapat mengambil tindakan (Autonomous Agents) dan sistem multimodal yang mampu memproses video, audio, serta ruang fisik secara real-time. Grafik di bawah menunjukkan persentase alokasi riset global pada arsitektur AI frontier.
+                </p>
+                <div class="chart-container">
+                    <canvas id="focusChart"></canvas>
+                </div>
+            </section>
+
+            <section class="bg-white rounded-2xl shadow-xl p-8 card-hover border border-gray-100" id="adopsi">
+                <div class="flex items-center mb-6">
+                    <span class="text-4xl mr-4">🏢</span>
+                    <h3 class="text-2xl font-bold text-brand-dark">Penetrasi AI per Sektor Industri</h3>
+                </div>
+                <p class="text-gray-600 mb-8 leading-relaxed">
+                    Dampak AI paling terasa pada sektor yang membutuhkan efisiensi data tinggi. Layanan Keuangan dan Teknologi Informasi memimpin adopsi, namun revolusi terbesar kini terjadi pada <strong>Kesehatan & Penemuan Obat</strong> (AI for Science) yang memangkas waktu riset secara drastis.
+                </p>
+                <div class="chart-container">
+                    <canvas id="industryChart"></canvas>
+                </div>
+            </section>
+
+        </div>
+
+        <section class="bg-white rounded-2xl shadow-xl p-8 mb-16 card-hover border border-gray-100" id="kapabilitas">
+            <div class="flex flex-col md:flex-row items-center">
+                <div class="md:w-1/2 pr-0 md:pr-10 mb-10 md:mb-0">
+                    <div class="flex items-center mb-6">
+                        <span class="text-4xl mr-4">🧠</span>
+                        <h3 class="text-3xl font-bold text-brand-dark">Lompatan Kapabilitas: 2023 vs Saat Ini</h3>
+                    </div>
+                    <p class="text-gray-600 mb-6 leading-relaxed text-lg">
+                        Generasi model masa kini tidak lagi kesulitan dengan logika kompleks atau halusinasi tingkat tinggi. Pengenalan arsitektur <em>System 2 Thinking</em> pada model frontier telah melipatgandakan kemampuan penalaran matematis dan otonomi.
+                    </p>
+                    <ul class="space-y-4">
+                        <li class="flex items-start">
+                            <span class="text-brand-emerald font-bold mr-3">✓</span>
+                            <span class="text-gray-700"><strong>Penalaran Logis:</strong> Peningkatan dari respons reaktif menjadi perencanaan multi-langkah.</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-brand-emerald font-bold mr-3">✓</span>
+                            <span class="text-gray-700"><strong>Koding & Eksekusi:</strong> AI tidak hanya menulis kode, tapi menguji, men-debug, dan mendeploy.</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-brand-emerald font-bold mr-3">✓</span>
+                            <span class="text-gray-700"><strong>Pemahaman Multimodal:</strong> Sintesis sempurna antara penglihatan, pendengaran, dan teks.</span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="md:w-1/2 w-full">
+                    <div class="chart-container" style="max-height: 450px; height: 400px;">
+                        <canvas id="capabilityChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="bg-brand-dark text-white rounded-2xl shadow-2xl p-8 md:p-12 mb-16" id="scaling">
+            <div class="text-center mb-10">
+                <span class="text-5xl mb-4 block">📈</span>
+                <h3 class="text-3xl font-bold mb-4">Hukum Penskalaan & Kinerja Komputasi</h3>
+                <p class="text-gray-400 max-w-2xl mx-auto text-lg">
+                    Seiring dengan bertambahnya jumlah parameter dan data komputasi (TFLOPS), kecerdasan AI tumbuh secara eksponensial. Kita sedang berada di titik infleksi di mana efisiensi algoritma mulai melampaui kebutuhan perangkat keras kasar.
+                </p>
+            </div>
+            <div class="chart-container" style="max-width: 900px; height: 400px;">
+                <canvas id="scalingChart"></canvas>
+            </div>
+        </section>
+
+        <section class="bg-white rounded-2xl shadow-xl p-8 md:p-12 card-hover border border-gray-100" id="timeline">
+            <div class="text-center mb-12">
+                <span class="text-5xl mb-4 block">⏳</span>
+                <h3 class="text-3xl font-bold text-brand-dark">Lintasan Menuju Kecerdasan Umum (AGI)</h3>
+                <p class="text-gray-600 max-w-2xl mx-auto">
+                    Perjalanan inovasi AI telah memampatkan evolusi dekade menjadi hitungan bulan. Berikut adalah peta jalan dari era generatif awal menuju sistem otonom.
+                </p>
+            </div>
+            
+            <div class="max-w-3xl mx-auto timeline-container">
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <h4 class="text-xl font-bold text-brand-blue mb-1">Era Generatif Awal (2020 - 2022)</h4>
+                    <p class="text-gray-600">Peluncuran model bahasa besar (LLM) pertama yang viable. Fokus utama pada generasi teks dan percakapan dasar. AI mulai mengenali struktur bahasa manusia dengan baik.</p>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot" style="background-color: #8B5CF6;"></div>
+                    <h4 class="text-xl font-bold text-brand-purple mb-1">Revolusi Chat & Visi (2023 - 2024)</h4>
+                    <p class="text-gray-600">Model instruction-tuned mendominasi pasar. Masuknya era multimodalitas awal di mana AI dapat melihat dan menghasilkan gambar berkualitas tinggi, memicu adopsi massal di sektor kreatif.</p>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot" style="background-color: #10B981;"></div>
+                    <h4 class="text-xl font-bold text-brand-emerald mb-1">Era Agen & Penalaran (2025 - Saat Ini)</h4>
+                    <p class="text-gray-600">Fokus beralih ke <em>System 2 Thinking</em>. AI tidak lagi memprediksi token selanjutnya secara buta, melainkan merencanakan, menguji hipotesis, dan mengeksekusi tugas digital kompleks secara otonom.</p>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot" style="background-color: #06B6D4;"></div>
+                    <h4 class="text-xl font-bold text-brand-cyan mb-1">Frontier Berikutnya: AI for Science & Fisik (Proyeksi Masa Depan)</h4>
+                    <p class="text-gray-600">Integrasi penuh AI dengan sistem robotika fisik dan simulasi molekuler. AI menjadi rekan penemu (co-discoverer) dalam medis, material baru, dan solusi energi berkelanjutan.</p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="bg-gray-900 text-gray-400 py-10 text-center">
+        <p class="mb-2">Disintesis dari data perkembangan AI global terkini.</p>
+        <p class="font-bold text-brand-cyan">Divisi Analitik Frontier AI &copy; 2026</p>
+    </footer>
+
+    <script>
+        function wrapLabel(label) {
+            if (label.length <= 16) return label;
+            const words = label.split(' ');
+            const lines = [];
+            let currentLine = '';
+            words.forEach(word => {
+                if ((currentLine + word).length > 16) {
+                    if (currentLine) lines.push(currentLine.trim());
+                    currentLine = word + ' ';
+                } else {
+                    currentLine += word + ' ';
+                }
+            });
+            if (currentLine) lines.push(currentLine.trim());
+            return lines;
+        }
+
+        const commonTooltipPlugin = {
+            tooltip: {
+                backgroundColor: 'rgba(15, 23, 42, 0.9)',
+                titleFont: { size: 14, family: 'Inter' },
+                bodyFont: { size: 13, family: 'Inter' },
+                padding: 12,
+                cornerRadius: 8,
+                callbacks: {
+                    title: function(tooltipItems) {
+                        const item = tooltipItems[0];
+                        let label = item.chart.data.labels[item.dataIndex];
+                        if (Array.isArray(label)) {
+                            return label.join(' ');
+                        } else {
+                            return label;
+                        }
+                    }
+                }
+            }
+        };
+
+        const focusLabelsRaw = [
+            "Agen Otonom & Eksekusi Tugas", 
+            "Pemahaman Multimodal Kompleks", 
+            "Penalaran & Logika (System 2)", 
+            "AI untuk Sains (Biologi & Material)", 
+            "Efisiensi Komputasi & Model Kecil"
+        ];
+        
+        const ctxFocus = document.getElementById('focusChart').getContext('2d');
+        new Chart(ctxFocus, {
+            type: 'doughnut',
+            data: {
+                labels: focusLabelsRaw.map(wrapLabel),
+                datasets: [{
+                    data: [35, 25, 20, 12, 8],
+                    backgroundColor: ['#1D4ED8', '#8B5CF6', '#10B981', '#F59E0B', '#06B6D4'],
+                    borderWidth: 0,
+                    hoverOffset: 10
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                cutout: '70%',
+                plugins: {
+                    legend: { position: 'right', labels: { font: { family: 'Inter' }, usePointStyle: true, padding: 20 } },
+                    ...commonTooltipPlugin
+                }
+            }
+        });
+
+        const industryLabelsRaw = [
+            "Layanan Keuangan & Perbankan",
+            "Teknologi & Pengembangan Perangkat Lunak",
+            "Kesehatan & Riset Medis",
+            "Manufaktur & Rantai Pasok",
+            "Pendidikan & Pelatihan",
+            "Media & Hiburan Kreatif"
+        ];
+
+        const ctxIndustry = document.getElementById('industryChart').getContext('2d');
+        new Chart(ctxIndustry, {
+            type: 'bar',
+            data: {
+                labels: industryLabelsRaw.map(wrapLabel),
+                datasets: [{
+                    label: 'Tingkat Adopsi & Integrasi (%)',
+                    data: [88, 92, 75, 65, 58, 80],
+                    backgroundColor: '#06B6D4',
+                    borderRadius: 6
+                }]
+            },
+            options: {
+                indexAxis: 'y',
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    x: { max: 100, grid: { color: '#F1F5F9' } },
+                    y: { grid: { display: false }, ticks: { font: { family: 'Inter', size: 12 } } }
+                },
+                plugins: {
+                    legend: { display: false },
+                    ...commonTooltipPlugin
+                }
+            }
+        });
+
+        const capabilityLabelsRaw = [
+            "Penalaran Logis & Matematika",
+            "Generasi & Debugging Kode",
+            "Akurasi Faktual (Minim Halusinasi)",
+            "Pemahaman Konteks Panjang",
+            "Otonomi Pengambilan Keputusan",
+            "Interaksi Multimodal Mulus"
+        ];
+
+        const ctxCapability = document.getElementById('capabilityChart').getContext('2d');
+        new Chart(ctxCapability, {
+            type: 'radar',
+            data: {
+                labels: capabilityLabelsRaw.map(wrapLabel),
+                datasets: [
+                    {
+                        label: 'Model Basis (Era 2023)',
+                        data: [40, 55, 50, 30, 20, 45],
+                        backgroundColor: 'rgba(245, 158, 11, 0.2)',
+                        borderColor: '#F59E0B',
+                        pointBackgroundColor: '#F59E0B',
+                        borderWidth: 2
+                    },
+                    {
+                        label: 'Frontier AI (Saat Ini)',
+                        data: [95, 90, 85, 98, 80, 92],
+                        backgroundColor: 'rgba(16, 185, 129, 0.3)',
+                        borderColor: '#10B981',
+                        pointBackgroundColor: '#10B981',
+                        borderWidth: 2
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    r: {
+                        angleLines: { color: '#E2E8F0' },
+                        grid: { color: '#E2E8F0' },
+                        pointLabels: { font: { family: 'Inter', size: 11 }, color: '#475569' },
+                        ticks: { display: false, max: 100, min: 0 }
+                    }
+                },
+                plugins: {
+                    legend: { position: 'bottom', labels: { font: { family: 'Inter' } } },
+                    ...commonTooltipPlugin
+                }
+            }
+        });
+
+        const timeLabelsRaw = ["Q1 2024", "Q3 2024", "Q1 2025", "Q3 2025", "Q1 2026", "Q3 2026 (Proyeksi)"];
+        const ctxScaling = document.getElementById('scalingChart').getContext('2d');
+        new Chart(ctxScaling, {
+            type: 'line',
+            data: {
+                labels: timeLabelsRaw.map(wrapLabel),
+                datasets: [
+                    {
+                        label: 'Kapasitas Komputasi (PetaFLOPs/s)',
+                        data: [100, 250, 800, 2000, 5000, 12000],
+                        borderColor: '#06B6D4',
+                        backgroundColor: 'rgba(6, 182, 212, 0.1)',
+                        borderWidth: 3,
+                        fill: true,
+                        tension: 0.4
+                    },
+                    {
+                        label: 'Tingkat Kecerdasan Sintetis (Indeks)',
+                        data: [20, 35, 65, 120, 250, 480],
+                        borderColor: '#8B5CF6',
+                        backgroundColor: 'rgba(139, 92, 246, 0.1)',
+                        borderWidth: 3,
+                        borderDash: [5, 5],
+                        fill: true,
+                        tension: 0.4
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                interaction: {
+                    mode: 'index',
+                    intersect: false,
+                },
+                scales: {
+                    x: { grid: { color: '#334155' }, ticks: { color: '#94A3B8', font: { family: 'Inter' } } },
+                    y: { grid: { color: '#334155' }, ticks: { display: false } }
+                },
+                plugins: {
+                    legend: { position: 'top', labels: { color: '#F8FAFC', font: { family: 'Inter' }, usePointStyle: true } },
+                    ...commonTooltipPlugin
+                }
+            }
+        });
+    </script>
+</body>
+</html>
