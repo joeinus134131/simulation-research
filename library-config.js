@@ -134,7 +134,7 @@ const libraryConfig = {
             title: "Blueprint Bisnis Masa Depan: Langka, Sustainable & High Income",
             category: "economy",
             path: "page/economy/economy_province.html",
-            date: "2025-05-05",
+            date: "2026-05-05",
             summary: "Blueprint Bisnis Masa Depan: Langka, Sustainable & High Income.",
             tags: ["Economy", "Asia Tenggara", "Finance"],
             coverImage: "https://www.investopedia.com/thmb/D-tg8AGlBOzML-aRcOp8iCwth9s=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/3-20-24cdratesfedannouncement-c5d8817e128c4e849986051853df1529.jpg",
@@ -144,7 +144,7 @@ const libraryConfig = {
             title: "Membongkar Dunia Kripto & Blockchain",
             category: "tech",
             path: "page/tech/blockchain.html",
-            date: "2025-05-05",
+            date: "2026-05-05",
             summary: "Blueprint Bisnis Masa Depan: Langka, Sustainable & High Income.",
             tags: ["Blockchain", "Asia Tenggara", "Tech"],
             coverImage: "https://evc.sa/wp-content/uploads/2023/05/Blockchain-1-1024x614.webp",
@@ -154,11 +154,21 @@ const libraryConfig = {
             title: "Lanskap Frontier AI: Perkembangan & Dampak Global",
             category: "tech",
             path: "page/tech/ai_frontier.html",
-            date: "2025-05-09",
+            date: "2026-05-09",
             summary: "Ai Transformation in frontier",
             tags: ["Tech", "Global", "Artificial Intelligence"],
-            coverImage: "https://trilateralresearch.com/wp-content/uploads/2023/11/Frontier-AI-heading-safely-into-new-territory.jpg",
+            coverImage: "https://d2csxpduxe849s.cloudfront.net/media/E32629C6-9347-4F84-81FEAEF7BFA342B3/5C3D1F1F-95D8-470B-A0A80883EA552939/FF31F749-B8FE-406A-BB1D5B9D1078ADBE/WebsiteJpg_XL-FRAI_Main%20Visual_Purple_Website.jpg",
             podcastUrl: "https://bombfbodieaqdbeipcuz.supabase.co/storage/v1/object/public/podcast/Saat%20AI%20Bukan%20Lagi%20Sekadar%20Chatbot.mp3"
+        },
+        {
+            title: "Infografis: Strategi Platform Keuangan Personal Berbasis AI",
+            category: "economy",
+            path: "page/economy/pfm_ai.html",
+            date: "2026-05-09",
+            summary: "Strategi PFM Berbasis AI.",
+            tags: ["Economy", "AI", "Finance"],
+            coverImage: "https://bernardmarr.com/wp-content/uploads/2024/10/The-Next-AI-Frontier-How-Multimodal-Systems-Are-Reshaping-Our-World.webp",
+            podcastUrl: "https://bombfbodieaqdbeipcuz.supabase.co/storage/v1/object/public/podcast/Mengungkap%20Revolusi%20PFM%20AI_%20Kelola%20Uang%20Lebih%20Personal,%20Otomatis,%20dan%20Aman%20di%20Era%20Digital%20Indonesia.mp3"
         }
     ]
 };

@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Infografis: Strategi Platform Keuangan Personal Berbasis AI</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <!-- 
+        NARRATIVE & STRUCTURE PLAN
+        Section 1: The Hook - Indonesian Market Opportunity (Big Numbers, Donut Chart)
+        Section 2: The "Why" - AI's Transformative Power (Icon Cards, Bar Chart)
+        Section 3: The Blueprint - Core Features & User Flow (HTML/CSS Flowchart)
+        Section 4: The Path to Profit - Monetization Models (Donut Chart)
+        Section 5: Measuring Success - Key Performance Indicators (Radar Chart, Big Numbers)
+        Section 6: The Execution - CEO's Strategic Playbook (HTML/CSS Timeline)
+
+        VISUALIZATION CHOICES
+        - Market Potential: Goal: Inform. Visualization: Single Big Numbers & Donut Chart. Justification: Big numbers grab attention for key stats (penetration, inclusion). A donut chart effectively shows the market composition (reached vs. potential). Library: Chart.js (Canvas). NO SVG.
+        - AI Benefits: Goal: Compare. Visualization: Bar Chart. Justification: Directly compares the effectiveness of AI PFM vs. Traditional methods across key benefits. Library: Chart.js (Canvas). NO SVG.
+        - User Flow: Goal: Organize. Visualization: Flow Chart. Justification: Clearly illustrates the process a user goes through, showing how features connect. Method: Structured HTML/CSS with Tailwind. NO SVG/Mermaid.
+        - Monetization Models: Goal: Compare (Composition). Visualization: Pie Chart. Justification: Shows the proportional contribution of different revenue streams to the whole. Library: Chart.js (Canvas). NO SVG.
+        - KPIs: Goal: Relationships. Visualization: Radar Chart. Justification: Effectively displays the balance and performance across multiple, distinct KPIs for a "healthy" business profile. Library: Chart.js (Canvas). NO SVG.
+        - CEO Playbook: Goal: Organize (Process). Visualization: Timeline. Justification: Best way to show a sequential, phased strategic plan. Method: Structured HTML/CSS with Tailwind. NO SVG/Mermaid.
+
+        CHOSEN COLOR PALETTE
+        Name: Brilliant Blues (#00A5E3, #8DD7BF, #FF96C5, #FF5768, #FFBF65)
+
+        CONFIRMATION
+        NEITHER Mermaid JS NOR SVG were used anywhere in this output. All charts are rendered on Canvas via Chart.js, and diagrams are built with structured HTML and Tailwind CSS.
+    -->
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f4f8;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 320px;
+            max-height: 400px;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 384px;
+            }
+        }
+        .kpi-card {
+            background-color: #ffffff;
+            border-radius: 0.75rem;
+            padding: 1.5rem;
+            text-align: center;
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .kpi-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -2px rgb(0 0 0 / 0.1);
+        }
+        .flowchart-step {
+            position: relative;
+            background-color: white;
+            border: 2px solid #00A5E3;
+            color: #1a202c;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            text-align: center;
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+            width: 90%;
+            margin: 0 auto;
+        }
+        .flowchart-arrow {
+            color: #00A5E3;
+            font-size: 2.5rem;
+            line-height: 1;
+            margin: 0.5rem 0;
+            font-weight: bold;
+        }
+        .timeline-item {
+            position: relative;
+            padding-bottom: 2.5rem;
+            padding-left: 2.5rem;
+            border-left: 3px solid #00A5E3;
+        }
+        .timeline-dot {
+            position: absolute;
+            left: -11px;
+            top: 0;
+            height: 20px;
+            width: 20px;
+            border-radius: 9999px;
+            background-color: #FF5768;
+            border: 3px solid #00A5E3;
+        }
+    </style>
+</head>
+<body class="text-gray-800">
+
+    <header class="bg-white shadow-md sticky top-0 z-50">
+        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <h1 class="text-2xl font-bold text-gray-900">Strategi PFM Berbasis AI</h1>
+            <div class="hidden md:flex space-x-8">
+                <a href="#peluang" class="text-gray-600 hover:text-[#00A5E3] transition">Peluang</a>
+                <a href="#fitur" class="text-gray-600 hover:text-[#00A5E3] transition">Fitur</a>
+                <a href="#profit" class="text-gray-600 hover:text-[#00A5E3] transition">Profitabilitas</a>
+                <a href="#kpi" class="text-gray-600 hover:text-[#00A5E3] transition">KPI</a>
+                <a href="#playbook" class="text-gray-600 hover:text-[#00A5E3] transition">Playbook</a>
+            </div>
+        </nav>
+    </header>
+
+    <main class="container mx-auto p-4 md:p-8">
+
+        <section id="peluang" class="my-12 text-center">
+            <h2 class="text-4xl font-extrabold text-gray-900 mb-4">Peluang Emas di Pasar Fintech Indonesia</h2>
+            <p class="max-w-3xl mx-auto text-lg text-gray-600 mb-12">Pasar Indonesia siap untuk inovasi keuangan digital, didorong oleh pertumbuhan adopsi internet dan inklusi keuangan yang pesat. Ini adalah fondasi yang kokoh untuk platform PFM berbasis AI.</p>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                <div class="grid grid-cols-2 gap-6">
+                    <div class="kpi-card">
+                        <div class="text-5xl font-black text-[#00A5E3]">79%</div>
+                        <p class="mt-2 text-gray-600">Penetrasi Internet (2024)</p>
+                    </div>
+                    <div class="kpi-card">
+                        <div class="text-5xl font-black text-[#8DD7BF]">84%</div>
+                        <p class="mt-2 text-gray-600">Indeks Inklusi Keuangan (2023)</p>
+                    </div>
+                </div>
+                <div class="bg-white rounded-lg shadow-md p-6">
+                    <h3 class="text-xl font-bold text-center mb-4">Potensi Pasar Inklusi Keuangan</h3>
+                    <div class="chart-container">
+                        <canvas id="marketOpportunityChart"></canvas>
+                    </div>
+                    <p class="text-center mt-4 text-gray-600">Meskipun inklusi keuangan sudah tinggi, masih ada 16% populasi yang merupakan target pasar potensial untuk dijangkau dengan layanan keuangan yang lebih mudah diakses.</p>
+                </div>
+            </div>
+        </section>
+        
+        <section id="mengapa-ai" class="my-16 py-12 bg-white rounded-lg shadow-lg">
+             <div class="container mx-auto px-6 text-center">
+                <h2 class="text-4xl font-extrabold text-gray-900 mb-4">Kekuatan AI: Dari Pencatatan Pasif ke Asisten Proaktif</h2>
+                <p class="max-w-3xl mx-auto text-lg text-gray-600 mb-12">AI mengubah manajemen keuangan dari tugas manual menjadi pengalaman yang cerdas, personal, dan otomatis. Platform PFM berbasis AI memberikan nilai yang jauh melampaui aplikasi tradisional.</p>
+                 <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                     <div class="chart-container">
+                        <canvas id="aiBenefitsChart"></canvas>
+                    </div>
+                    <div class="text-left space-y-4">
+                        <div class="flex items-start">
+                            <span class="text-2xl text-[#00A5E3] mr-4">✓</span>
+                            <div>
+                                <h4 class="font-bold text-lg">Personalisasi Mendalam</h4>
+                                <p class="text-gray-600">Rekomendasi produk dan saran finansial yang disesuaikan dengan profil risiko dan tujuan setiap individu.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <span class="text-2xl text-[#00A5E3] mr-4">✓</span>
+                            <div>
+                                <h4 class="font-bold text-lg">Otomatisasi Cerdas</h4>
+                                <p class="text-gray-600">Kategorisasi transaksi otomatis, pengingat tagihan, dan prediksi arus kas untuk mengurangi beban manual.</p>
+                            </div>
+                        </div>
+                         <div class="flex items-start">
+                            <span class="text-2xl text-[#00A5E3] mr-4">✓</span>
+                            <div>
+                                <h4 class="font-bold text-lg">Keamanan Tingkat Lanjut</h4>
+                                <p class="text-gray-600">Deteksi anomali dan penipuan secara real-time untuk melindungi aset finansial pengguna 24/7.</p>
+                            </div>
+                        </div>
+                    </div>
+                 </div>
+            </div>
+        </section>
+
+        <section id="fitur" class="my-16 text-center">
+            <h2 class="text-4xl font-extrabold text-gray-900 mb-4">Membangun Platform Juara: Alur Pengguna Inti</h2>
+            <p class="max-w-3xl mx-auto text-lg text-gray-600 mb-12">Fitur-fitur unggulan harus terintegrasi dalam alur yang mulus, memberikan nilai sejak pertama kali pengguna menghubungkan akun mereka hingga menerima wawasan finansial yang dapat ditindaklanjuti.</p>
+            <div class="flex flex-col md:flex-row justify-center items-center gap-0 md:gap-4">
+                <div class="flowchart-step">
+                    <h3 class="font-bold">1. Agregasi Data</h3>
+                    <p class="text-sm text-gray-600">Hubungkan semua akun (bank, e-wallet, investasi) dalam satu dasbor.</p>
+                </div>
+                <div class="flowchart-arrow transform md:-rotate-90">➔</div>
+                <div class="flowchart-step">
+                    <h3 class="font-bold">2. Kategorisasi Otomatis</h3>
+                    <p class="text-sm text-gray-600">AI mengklasifikasikan setiap transaksi secara cerdas.</p>
+                </div>
+                <div class="flowchart-arrow transform md:-rotate-90">➔</div>
+                <div class="flowchart-step">
+                    <h3 class="font-bold">3. Wawasan Finansial</h3>
+                    <p class="text-sm text-gray-600">Analisis pola pengeluaran, deteksi langganan, dan perbandingan.</p>
+                </div>
+                <div class="flowchart-arrow transform md:-rotate-90">➔</div>
+                <div class="flowchart-step">
+                    <h3 class="font-bold">4. Rekomendasi Proaktif</h3>
+                    <p class="text-sm text-gray-600">AI memberikan saran untuk menabung, berinvestasi, dan optimasi anggaran.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="profit" class="my-16 py-12 bg-white rounded-lg shadow-lg">
+            <div class="container mx-auto px-6">
+                <h2 class="text-4xl font-extrabold text-gray-900 mb-4 text-center">Jalan Menuju Profitabilitas</h2>
+                <p class="max-w-3xl mx-auto text-lg text-gray-600 mb-12 text-center">Kombinasi model pendapatan yang beragam adalah kunci untuk membangun bisnis yang berkelanjutan. Keseimbangan antara layanan gratis untuk akuisisi dan fitur premium untuk monetisasi sangat penting.</p>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                    <div class="text-left space-y-4">
+                         <div class="flex items-start p-4 rounded-lg hover:bg-gray-50 transition">
+                            <div class="text-2xl mr-4"> subscription </div>
+                            <div>
+                                <h4 class="font-bold text-lg text-[#00A5E3]">Model Berlangganan (Subscription)</h4>
+                                <p class="text-gray-600">Pendapatan berulang yang stabil dari pengguna yang mengakses fitur-fitur premium. Fondasi utama profitabilitas.</p>
+                            </div>
+                        </div>
+                         <div class="flex items-start p-4 rounded-lg hover:bg-gray-50 transition">
+                            <div class="text-2xl mr-4"> affiliate_marketing </div>
+                            <div>
+                                <h4 class="font-bold text-lg text-[#8DD7BF]">Pemasaran Afiliasi</h4>
+                                <p class="text-gray-600">Komisi dari produk keuangan (kartu kredit, pinjaman) yang direkomendasikan dan digunakan oleh pengguna.</p>
+                            </div>
+                        </div>
+                         <div class="flex items-start p-4 rounded-lg hover:bg-gray-50 transition">
+                            <div class="text-2xl mr-4"> data_monetization </div>
+                            <div>
+                                <h4 class="font-bold text-lg text-[#FF96C5]">Monetisasi Data Agregat</h4>
+                                <p class="text-gray-600">Menjual wawasan tren pasar dari data anonim kepada institusi, dengan memprioritaskan privasi pengguna.</p>
+                            </div>
+                        </div>
+                    </div>
+                     <div class="chart-container">
+                        <canvas id="monetizationChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section id="kpi" class="my-16 text-center">
+            <h2 class="text-4xl font-extrabold text-gray-900 mb-4">Mengukur Apa yang Penting: KPI Kunci</h2>
+            <p class="max-w-3xl mx-auto text-lg text-gray-600 mb-12">Fokus pada metrik yang tepat akan memandu pengambilan keputusan strategis dan memastikan pertumbuhan yang sehat dan berkelanjutan.</p>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                <div class="bg-white rounded-lg shadow-md p-6">
+                    <h3 class="text-xl font-bold text-center mb-4">Profil Bisnis PFM yang Sehat</h3>
+                    <div class="chart-container">
+                        <canvas id="kpiRadarChart"></canvas>
+                    </div>
+                     <p class="text-center mt-4 text-gray-600">Keseimbangan antara akuisisi, retensi, dan monetisasi pengguna sangat penting untuk kesehatan bisnis jangka panjang.</p>
+                </div>
+                 <div class="grid grid-cols-2 gap-6">
+                    <div class="kpi-card">
+                        <p class="text-gray-600 mb-2">Target LTV:CAC Ratio</p>
+                        <div class="text-5xl font-black text-[#FF5768]">> 3:1</div>
+                        <p class="mt-2 text-sm text-gray-500">Nilai pengguna harus jauh lebih besar dari biaya akuisisinya.</p>
+                    </div>
+                    <div class="kpi-card">
+                        <p class="text-gray-600 mb-2">Target Retensi Bulanan</p>
+                        <div class="text-5xl font-black text-[#FFBF65]">> 40%</div>
+                        <p class="mt-2 text-sm text-gray-500">Menjaga pengguna tetap aktif adalah kunci CLTV yang tinggi.</p>
+                    </div>
+                     <div class="kpi-card col-span-2">
+                        <p class="text-gray-600 mb-2">Fokus Utama</p>
+                        <div class="text-3xl md:text-4xl font-black text-[#00A5E3]">Customer Lifetime Value (CLTV)</div>
+                        <p class="mt-2 text-sm text-gray-500">Metrik pamungkas yang menggabungkan pendapatan, retensi, dan profitabilitas per pengguna.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="playbook" class="my-16 py-12">
+            <h2 class="text-4xl font-extrabold text-gray-900 mb-4 text-center">Playbook CEO: Dari Ide Menjadi Profit</h2>
+            <p class="max-w-3xl mx-auto text-lg text-gray-600 mb-12 text-center">Menjalankan startup PFM membutuhkan visi strategis, eksekusi yang disiplin, dan adaptasi yang cepat.</p>
+            <div class="max-w-2xl mx-auto">
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <h3 class="text-xl font-bold text-[#00A5E3]">Fase 1: Validasi & MVP</h3>
+                    <p class="text-gray-600">Luncurkan produk dengan fitur inti (MVP) untuk mendapatkan umpan balik pasar. Fokus pada validasi ide dengan biaya minimal.</p>
+                </div>
+                <div class="timeline-item">
+                     <div class="timeline-dot"></div>
+                    <h3 class="text-xl font-bold text-[#00A5E3]">Fase 2: Pendanaan & Pengembangan Tim</h3>
+                    <p class="text-gray-600">Amankan pendanaan awal (seed funding). Rekrut talenta kunci di bidang teknologi, data science, dan keamanan.</p>
+                </div>
+                <div class="timeline-item">
+                     <div class="timeline-dot"></div>
+                    <h3 class="text-xl font-bold text-[#00A5E3]">Fase 3: Pertumbuhan & Akuisisi Pengguna</h3>
+                    <p class="text-gray-600">Implementasikan strategi pemasaran digital dan kemitraan strategis untuk mengakselerasi pertumbuhan pengguna secara masif.</p>
+                </div>
+                <div class="timeline-item">
+                     <div class="timeline-dot"></div>
+                    <h3 class="text-xl font-bold text-[#00A5E3]">Fase 4: Optimalisasi & Skalabilitas</h3>
+                    <p class="text-gray-600">Gunakan data dari KPI untuk mengoptimalkan produk dan model bisnis. Fokus pada peningkatan LTV:CAC dan skalabilitas platform.</p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+    
+    <footer class="bg-gray-800 text-white text-center p-6">
+        <p>&copy; 2025 Platform PFM AI Anda. Misi kami adalah memberdayakan kesehatan finansial Indonesia.</p>
+    </footer>
+
+    <script>
+        function wrapText(text, maxWidth) {
+            const words = text.split(' ');
+            let lines = [];
+            let currentLine = words[0];
+
+            for (let i = 1; i < words.length; i++) {
+                const word = words[i];
+                const width = currentLine.length + word.length + 1;
+                if (width < maxWidth) {
+                    currentLine += ' ' + word;
+                } else {
+                    lines.push(currentLine);
+                    currentLine = word;
+                }
+            }
+            lines.push(currentLine);
+            return lines;
+        }
+
+        const tooltipTitleCallback = (tooltipItems) => {
+            const item = tooltipItems[0];
+            let label = item.chart.data.labels[item.dataIndex];
+            if (Array.isArray(label)) {
+                return label.join(' ');
+            }
+            return label;
+        };
+        
+        const defaultPlugins = {
+            legend: {
+                position: 'bottom',
+                 labels: {
+                    font: {
+                        family: 'Inter',
+                        size: 12
+                    }
+                }
+            },
+            tooltip: {
+                callbacks: {
+                    title: tooltipTitleCallback
+                },
+                titleFont: { family: 'Inter', weight: 'bold', size: 14 },
+                bodyFont: { family: 'Inter', size: 12 },
+                backgroundColor: '#1f2937',
+                titleColor: '#ffffff',
+                bodyColor: '#ffffff',
+                padding: 12,
+                cornerRadius: 6
+            }
+        };
+
+        const brilliantBlues = ['#00A5E3', '#8DD7BF', '#FF96C5', '#FF5768', '#FFBF65'];
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const ctxMarket = document.getElementById('marketOpportunityChart').getContext('2d');
+            new Chart(ctxMarket, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Sudah Terinklusi', 'Belum Terinklusi'],
+                    datasets: [{
+                        label: 'Potensi Pasar',
+                        data: [84, 16],
+                        backgroundColor: [brilliantBlues[1], brilliantBlues[4]],
+                        borderColor: '#ffffff',
+                        borderWidth: 4,
+                        hoverOffset: 4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    cutout: '70%',
+                    plugins: defaultPlugins
+                }
+            });
+
+            const ctxBenefits = document.getElementById('aiBenefitsChart').getContext('2d');
+            new Chart(ctxBenefits, {
+                type: 'bar',
+                data: {
+                    labels: ['Personalisasi', 'Efisiensi', 'Keamanan'],
+                    datasets: [
+                        {
+                            label: 'PFM Tradisional',
+                            data: [30, 45, 50],
+                            backgroundColor: '#cbd5e1',
+                            borderColor: '#94a3b8',
+                            borderWidth: 1
+                        },
+                        {
+                            label: 'PFM Berbasis AI',
+                            data: [90, 85, 95],
+                            backgroundColor: brilliantBlues[0],
+                            borderColor: '#007ab3',
+                            borderWidth: 1
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            max: 100,
+                            ticks: {
+                                callback: function(value) {
+                                    return value + '%'
+                                },
+                                font: { family: 'Inter' }
+                            }
+                        },
+                        x: {
+                             ticks: { font: { family: 'Inter' } }
+                        }
+                    },
+                    plugins: defaultPlugins
+                }
+            });
+
+            const ctxMonetization = document.getElementById('monetizationChart').getContext('2d');
+            new Chart(ctxMonetization, {
+                type: 'pie',
+                data: {
+                    labels: ['Subscription', 'Afiliasi', 'Data (Anonim)', 'Lainnya'],
+                    datasets: [{
+                        label: 'Model Pendapatan',
+                        data: [50, 30, 15, 5],
+                        backgroundColor: [brilliantBlues[0], brilliantBlues[1], brilliantBlues[2], '#e2e8f0'],
+                        borderColor: '#ffffff',
+                        borderWidth: 4,
+                        hoverOffset: 8
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: defaultPlugins
+                }
+            });
+
+            const ctxKpi = document.getElementById('kpiRadarChart').getContext('2d');
+            const kpiLabelsRaw = [
+                'Tingkat Retensi Pengguna', 
+                'Rasio LTV:CAC', 
+                'Skor Net Promoter (NPS)', 
+                'Tingkat Konversi Premium', 
+                'Efisiensi Operasional (Cost-to-Income)'
+            ];
+            const kpiLabels = kpiLabelsRaw.map(label => wrapText(label, 16));
+
+            new Chart(ctxKpi, {
+                type: 'radar',
+                data: {
+                    labels: kpiLabels,
+                    datasets: [{
+                        label: 'Profil PFM Sehat',
+                        data: [80, 85, 75, 70, 90],
+                        fill: true,
+                        backgroundColor: 'rgba(255, 87, 104, 0.2)',
+                        borderColor: brilliantBlues[3],
+                        pointBackgroundColor: brilliantBlues[3],
+                        pointBorderColor: '#fff',
+                        pointHoverBackgroundColor: '#fff',
+                        pointHoverBorderColor: brilliantBlues[3]
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                     scales: {
+                        r: {
+                            angleLines: { color: '#d1d5db' },
+                            grid: { color: '#e5e7eb' },
+                            pointLabels: { 
+                                font: { size: 12, family: 'Inter', weight: '600' },
+                                color: '#4b5563'
+                            },
+                            ticks: {
+                                backdropColor: '#f0f4f8',
+                                color: '#6b7280',
+                                font: { family: 'Inter' }
+                            },
+                            suggestedMin: 0,
+                            suggestedMax: 100
+                        }
+                    },
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: {
+                            callbacks: {
+                                title: tooltipTitleCallback
+                            },
+                           titleFont: { family: 'Inter', weight: 'bold', size: 14 },
+                           bodyFont: { family: 'Inter', size: 12 },
+                           backgroundColor: '#1f2937',
+                           titleColor: '#ffffff',
+                           bodyColor: '#ffffff',
+                           padding: 12,
+                           cornerRadius: 6
+                        }
+                    }
+                }
+            });
+
+        });
+    </script>
+</body>
+</html>
