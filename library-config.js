@@ -169,6 +169,16 @@ const libraryConfig = {
             tags: ["Economy", "AI", "Finance"],
             coverImage: "https://bernardmarr.com/wp-content/uploads/2024/10/The-Next-AI-Frontier-How-Multimodal-Systems-Are-Reshaping-Our-World.webp",
             podcastUrl: "https://bombfbodieaqdbeipcuz.supabase.co/storage/v1/object/public/podcast/Mengungkap%20Revolusi%20PFM%20AI_%20Kelola%20Uang%20Lebih%20Personal,%20Otomatis,%20dan%20Aman%20di%20Era%20Digital%20Indonesia.mp3"
+        }, 
+        {
+            title: "Peluang di Ujung Krisis: Analisis Pasar & Strategi 2026",
+            category: "economy",
+            path: "page/economy/world_crisis_2026.html",
+            date: "2026-05-10",
+            summary: "Peluang di Ujung Krisis: Analisis Pasar & Strategi 2026",
+            tags: ["Economy", "Global", "Strategy"],
+            coverImage: "https://www.brookings.edu/wp-content/uploads/2024/10/global-economy.jpg?quality=50&w=1500",
+            podcastUrl: "https://bombfbodieaqdbeipcuz.supabase.co/storage/v1/object/public/podcast/Cuan%20AI%20Dan%20Bitcoin%20Saat%20Krisis%20Global.mp3"
         }
     ]
 };
